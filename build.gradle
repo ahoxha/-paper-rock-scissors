@@ -1,0 +1,41 @@
+plugins {
+	id 'java'
+	id 'eclipse'
+	id "com.github.spotbugs" version "1.6.8"
+}
+
+wrapper {
+    gradleVersion = '5.0'
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.1.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.1.0'
+    testCompileOnly 'junit:junit:4.12'
+    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.1.0'
+}
+
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
+test {
+	useJUnitPlatform()
+ 	testLogging {
+      exceptionFormat = 'full'
+      events "failed"
+      afterSuite { desc, result ->
+        if (!desc.parent) { 
+            println "\ntotal: ${result.testCount} | passed: ${result.successfulTestCount} | failed: ${result.failedTestCount} | skipped: ${result.skippedTestCount}\n"
+        }
+      }
+    }
+ }
