@@ -40,7 +40,7 @@ public class Arbiter {
 	}
 
 	/**
-	 * As the players to make the move and decide who is the winner.
+	 * Ask the players to make the move and decide who is the winner.
 	 * 
 	 * @return The winning player, or null if there is a tie between them.
 	 */
