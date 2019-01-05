@@ -53,25 +53,10 @@ public class Arbiter {
 	 * @return The winning player, or null if there is a tie between them.
 	 */
 	public Player executeRound() {
-		Item player1Item;
-		Item player2Item;
-		CompletableFuture<Item> future1 = CompletableFuture.supplyAsync(() -> {
-			return player1.play();
-		});
-		CompletableFuture<Item> future2 = CompletableFuture.supplyAsync(() -> {
-			return player2.play();
-		});
-		try {
-			player1Item = future1.get(SECONDS_TO_WAIT_FOR_PLAYER, TimeUnit.SECONDS);
-		} catch (InterruptedException | ExecutionException | TimeoutException e) {
-			player1Item = null;
-		}
-		try {
-			player2Item = future2.get(SECONDS_TO_WAIT_FOR_PLAYER, TimeUnit.SECONDS);
-		} catch (InterruptedException | ExecutionException | TimeoutException e) {
-			player2Item = null;
-		}
+		Item player1Item = getFirstPlayersItem();
+		Item player2Item = getSecondPlayersItem();
 		ForkJoinPool.commonPool().awaitQuiescence(SECONDS_TO_WAIT_FOR_PLAYER, TimeUnit.SECONDS);
+
 		if (player1Item == null && player2Item == null) {
 			scoreBoard.addRecords("Timed out", "Timed out", "It's a tie");
 			scoreBoard.incrementTies();
@@ -103,6 +88,33 @@ public class Arbiter {
 		scoreBoard.addRecords(player1Item.name(), player2Item.name(), player2.getName());
 		scoreBoard.incrementSecondPlayersScore();
 		return player2;
+	}
+
+	private Item getFirstPlayersItem() {
+		Item player1Item;
+		CompletableFuture<Item> future1 = CompletableFuture.supplyAsync(() -> {
+			return player1.play();
+		});
+		try {
+			player1Item = future1.get(SECONDS_TO_WAIT_FOR_PLAYER, TimeUnit.SECONDS);
+		} catch (InterruptedException | ExecutionException | TimeoutException e) {
+			player1Item = null;
+		}
+		return player1Item;
+	}
+
+	private Item getSecondPlayersItem() {
+		Item player2Item;
+		CompletableFuture<Item> future2 = CompletableFuture.supplyAsync(() -> {
+			return player2.play();
+		});
+
+		try {
+			player2Item = future2.get(SECONDS_TO_WAIT_FOR_PLAYER, TimeUnit.SECONDS);
+		} catch (InterruptedException | ExecutionException | TimeoutException e) {
+			player2Item = null;
+		}
+		return player2Item;
 	}
 
 	public String getLastResult() {
