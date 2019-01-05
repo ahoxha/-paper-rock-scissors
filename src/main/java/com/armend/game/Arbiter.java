@@ -1,5 +1,6 @@
 package com.armend.game;
 
+import java.io.PrintStream;
 import java.util.Objects;
 
 import com.armend.game.components.Item;
@@ -10,6 +11,7 @@ public class Arbiter {
 	private Player player1;
 	private Player player2;
 	private GameStrategy strategy;
+	private ScoreBoard scoreBoard;
 
 	public Arbiter(GameStrategy strategy, Player player1, Player player2) {
 		Objects.requireNonNull(strategy, "NULL value for 'strategy' is not allowed");
@@ -18,6 +20,7 @@ public class Arbiter {
 		this.strategy = strategy;
 		this.player1 = player1;
 		this.player2 = player2;
+		scoreBoard = new ScoreBoard(player1.getName(), player2.getName());
 	}
 
 	/**
@@ -32,6 +35,10 @@ public class Arbiter {
 		}
 	}
 
+	public void printScores(PrintStream stream) {
+		scoreBoard.printTo(stream);
+	}
+
 	/**
 	 * As the players to make the move and decide who is the winner.
 	 * 
@@ -42,11 +49,17 @@ public class Arbiter {
 		Item player2Item = player2.play();
 		Item result = strategy.whoIsTheWinner(player1Item, player2Item);
 		if (result == null) {
+			scoreBoard.addRecords(player1Item.name(), player2Item.name(), "It's a tie");
+			scoreBoard.incementTies();
 			return null;
 		}
 		if (result == player1Item) {
+			scoreBoard.addRecords(player1Item.name(), player2Item.name(), player1.getName());
+			scoreBoard.incrementFirstPlayesScore();
 			return player1;
 		}
+		scoreBoard.addRecords(player1Item.name(), player2Item.name(), player2.getName());
+		scoreBoard.incrementSecondPlayersScore();
 		return player2;
 	}
 }

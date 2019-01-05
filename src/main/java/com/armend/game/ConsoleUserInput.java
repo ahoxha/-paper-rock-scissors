@@ -1,5 +1,6 @@
 package com.armend.game;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 import com.armend.game.components.Item;
@@ -7,13 +8,15 @@ import com.armend.game.components.Item;
 public class ConsoleUserInput implements UserInput {
 
 	private Scanner scanner;
+	private final int MAX_TRIES = 5;
 
 	public ConsoleUserInput() {
-		scanner = new Scanner(System.in);
+		scanner = new Scanner(System.in, StandardCharsets.UTF_8.name());
 	}
 
 	@Override
 	public Item get() {
+		int tries = 0;
 		Item item = null;
 		do {
 			System.out.println("Type S for Scissors, R for Rock, P for Paper:");
@@ -28,7 +31,8 @@ public class ConsoleUserInput implements UserInput {
 			if (item == null) {
 				System.err.println("Wrong value: " + input);
 			}
-		} while (item == null);
+			tries++;
+		} while (item == null && tries < MAX_TRIES);
 		return item;
 	}
 
