@@ -2,7 +2,7 @@ package com.armend.game.components;
 
 import java.security.SecureRandom;
 
-public class ComputerPlayer extends AbstractPlayer {
+public class ComputerPlayer extends Player {
 
 	private SecureRandom random;
 	private Item[] components;
@@ -15,7 +15,8 @@ public class ComputerPlayer extends AbstractPlayer {
 
 	@Override
 	public Item play() {
-		return components[random.nextInt(components.length)];
+		previousItem = components[random.nextInt(components.length)];
+		return previousItem;
 	}
 
 	@Override

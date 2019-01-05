@@ -1,14 +1,23 @@
 package com.armend.game.components;
 
-public class HumanPlayer extends AbstractPlayer {
+import com.armend.game.UserInput;
 
-	public HumanPlayer(String name) {
+public class HumanPlayer extends Player {
+
+	private UserInput input;
+
+	public HumanPlayer(String name, UserInput input) {
 		super(name);
+		if (input == null) {
+			throw new IllegalArgumentException("User input must not be null.");
+		}
+		this.input = input;
 	}
 
 	@Override
 	public Item play() {
-		return null;
+		previousItem = input.get();
+		return previousItem;
 	}
 
 	@Override

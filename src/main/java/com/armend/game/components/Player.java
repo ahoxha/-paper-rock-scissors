@@ -7,15 +7,20 @@ package com.armend.game.components;
  * @author armend.hoxha
  *
  */
-public abstract class AbstractPlayer {
+public abstract class Player {
 	private String name;
+	protected Item previousItem;
 
-	public AbstractPlayer(String name) {
+	public Player(String name) {
 		this.name = name;
 	}
 
 	public String getName() {
 		return this.name;
+	}
+
+	public Item getPreviousItem() {
+		return previousItem;
 	}
 
 	public abstract Item play();
