@@ -18,9 +18,10 @@ import com.armend.game.components.Item;
  */
 public class StandardStrategy implements GameStrategy {
 
-	private final Map<String, Integer> decisionTable = new HashMap<>();
+	private final Map<String, Integer> decisionTable;
 
 	public StandardStrategy() {
+		decisionTable = new HashMap<>();
 		decisionTable.put(Item.Paper.name() + Item.Rock.name(), 1);
 		decisionTable.put(Item.Rock.name() + Item.Paper.name(), 2);
 		decisionTable.put(Item.Rock.name() + Item.Scissors.name(), 1);
@@ -38,10 +39,14 @@ public class StandardStrategy implements GameStrategy {
 			throw new IllegalArgumentException("item1 should not be null");
 		}
 		if (item2 == null) {
-			throw new IllegalArgumentException("item2 shold not be null");
+			throw new IllegalArgumentException("item2 should not be null");
 		}
 
 		Integer winner = decisionTable.get(item1.name() + item2.name());
+		if (winner == null) {
+			throw new RuntimeException(
+					"Unable to decide who's the winner. Make sure you have included all the possibilites in the decisionTable.");
+		}
 		switch (winner) {
 		case 0:
 			return null;
@@ -50,8 +55,7 @@ public class StandardStrategy implements GameStrategy {
 		case 2:
 			return item2;
 		default:
-			throw new RuntimeException(
-					"Unable to decide who's the winner. Make sure you have included all the possibilites in the decisionTable.");
+			throw new RuntimeException("The value of 'winner' must be any of [0,1,2]; winner = " + winner);
 		}
 	}
 }

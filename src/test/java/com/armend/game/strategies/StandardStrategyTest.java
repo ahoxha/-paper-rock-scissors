@@ -59,4 +59,34 @@ public class StandardStrategyTest {
 	public void testScissorsScissors() {
 		Assertions.assertNull(strategy.whoIsTheWinner(Item.Scissors, Item.Scissors));
 	}
+
+	@Test
+	public void testWithFirstNullItem() {
+		try {
+			strategy.whoIsTheWinner(null, Item.Paper);
+			Assertions.fail("Should have thrown an IllegalArgumentException");
+		} catch (IllegalArgumentException e) {
+			Assertions.assertEquals("item1 should not be null", e.getMessage());
+		}
+	}
+
+	@Test
+	public void testWithSecondNullItem() {
+		try {
+			strategy.whoIsTheWinner(Item.Rock, null);
+			Assertions.fail("Should have thrown an IllegalArgumentException");
+		} catch (IllegalArgumentException e) {
+			Assertions.assertEquals("item2 should not be null", e.getMessage());
+		}
+	}
+
+	@Test
+	public void testWithBothNullItems() {
+		try {
+			strategy.whoIsTheWinner(null, null);
+			Assertions.fail("Should have thrown an IllegalArgumentException");
+		} catch (IllegalArgumentException e) {
+			Assertions.assertEquals("item1 should not be null", e.getMessage());
+		}
+	}
 }
