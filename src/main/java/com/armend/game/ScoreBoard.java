@@ -57,7 +57,7 @@ public class ScoreBoard {
 		secondPlayersTotalScore++;
 	}
 
-	public void incementTies() {
+	public void incrementTies() {
 		ties++;
 	}
 

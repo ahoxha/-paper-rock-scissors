@@ -50,7 +50,7 @@ public class Arbiter {
 		Item result = strategy.whoIsTheWinner(player1Item, player2Item);
 		if (result == null) {
 			scoreBoard.addRecords(player1Item.name(), player2Item.name(), "It's a tie");
-			scoreBoard.incementTies();
+			scoreBoard.incrementTies();
 			return null;
 		}
 		if (result == player1Item) {
