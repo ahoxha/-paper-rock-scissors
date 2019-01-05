@@ -17,9 +17,16 @@ public class Arbiter {
 	private Player player2;
 	private GameStrategy strategy;
 	private ScoreBoard scoreBoard;
-	private final int SECONDS_TO_WAIT_FOR_PLAYER = 4;
+	private static final int defaultSecondsToWait = 4;
+	private int secondsToWait;// time in seconds to wait for the user if 'async' is true
+	private boolean async; // if true, it will time out if the players don't respond on time, otherwise it
+							// will wait indefinitely.
 
 	public Arbiter(GameStrategy strategy, Player player1, Player player2) {
+		this(strategy, player1, player2, true, defaultSecondsToWait);
+	}
+
+	public Arbiter(GameStrategy strategy, Player player1, Player player2, boolean async, int secondsToWait) {
 		Objects.requireNonNull(strategy, "NULL value for 'strategy' is not allowed");
 		Objects.requireNonNull(player1, "NULL value for 'player1' is not allowed");
 		Objects.requireNonNull(player2, "NULL value for 'player2' is not allwed");
@@ -27,6 +34,8 @@ public class Arbiter {
 		this.player1 = player1;
 		this.player2 = player2;
 		scoreBoard = new ScoreBoard(player1.getName(), player2.getName());
+		this.async = async;
+		this.secondsToWait = secondsToWait < 1 ? defaultSecondsToWait : secondsToWait;
 	}
 
 	/**
@@ -46,16 +55,28 @@ public class Arbiter {
 	}
 
 	/**
-	 * Ask the players to make the move and decide who is the winner. It waits a
-	 * certain time for a player, if the player fails to play on time looses the
-	 * round.
+	 * Ask the players to make the move and decide who is the winner. If 'async' is
+	 * true, it waits a certain time for a player, if the player fails to play on
+	 * time looses the round. If 'async' is false, it waits for the player
+	 * indefinitely.
 	 * 
 	 * @return The winning player, or null if there is a tie between them.
 	 */
 	public Player executeRound() {
+		if (async) {
+			return executeAsync();
+		}
+		return executeSync();
+	}
+
+	private Player executeSync() {
+		return getWinner(player1.play(), player2.play());
+	}
+
+	private Player executeAsync() {
 		Item player1Item = getFirstPlayersItem();
 		Item player2Item = getSecondPlayersItem();
-		ForkJoinPool.commonPool().awaitQuiescence(SECONDS_TO_WAIT_FOR_PLAYER, TimeUnit.SECONDS);
+		ForkJoinPool.commonPool().awaitQuiescence(secondsToWait, TimeUnit.SECONDS);
 
 		if (player1Item == null && player2Item == null) {
 			scoreBoard.addRecords("Timed out", "Timed out", "It's a tie");
@@ -73,7 +94,20 @@ public class Arbiter {
 			return player1;
 		}
 
-		// if both players have made the move, then decide who's the winner
+		// if both players have made the move, then decide who's the winner based on the
+		// strategy
+		return getWinner(player1Item, player2Item);
+	}
+
+	/**
+	 * Given the selected items from the two players, return the winning player
+	 * based on the game's strategy.
+	 * 
+	 * @param player1Item Item selected by the first player.
+	 * @param player2Item Item selected by the second player.
+	 * @return The winning player or null if there's a tie.
+	 */
+	private Player getWinner(Item player1Item, Item player2Item) {
 		Item result = strategy.whoIsTheWinner(player1Item, player2Item);
 		if (result == null) {
 			scoreBoard.addRecords(player1Item.name(), player2Item.name(), "It's a tie");
@@ -90,31 +124,37 @@ public class Arbiter {
 		return player2;
 	}
 
+	/**
+	 * Retrieve the first player's selected item asynchronously.
+	 * 
+	 * @return The selected item, or null if timed out.
+	 */
 	private Item getFirstPlayersItem() {
-		Item player1Item;
 		CompletableFuture<Item> future1 = CompletableFuture.supplyAsync(() -> {
 			return player1.play();
 		});
 		try {
-			player1Item = future1.get(SECONDS_TO_WAIT_FOR_PLAYER, TimeUnit.SECONDS);
+			return future1.get(secondsToWait, TimeUnit.SECONDS);
 		} catch (InterruptedException | ExecutionException | TimeoutException e) {
-			player1Item = null;
+			return null;
 		}
-		return player1Item;
 	}
 
+	/**
+	 * Retrieve the second player's selected item asynchronously.
+	 * 
+	 * @return The selected item, or null if timed out.
+	 */
 	private Item getSecondPlayersItem() {
-		Item player2Item;
 		CompletableFuture<Item> future2 = CompletableFuture.supplyAsync(() -> {
 			return player2.play();
 		});
 
 		try {
-			player2Item = future2.get(SECONDS_TO_WAIT_FOR_PLAYER, TimeUnit.SECONDS);
+			return future2.get(secondsToWait, TimeUnit.SECONDS);
 		} catch (InterruptedException | ExecutionException | TimeoutException e) {
-			player2Item = null;
+			return null;
 		}
-		return player2Item;
 	}
 
 	public String getLastResult() {
