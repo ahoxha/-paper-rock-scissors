@@ -22,10 +22,36 @@ public class Arbiter {
 	private boolean async; // if true, it will time out if the players don't respond on time, otherwise it
 							// will wait indefinitely.
 
+	/**
+	 * Create an arbiter with a given game strategy and two players. The 'async'
+	 * parameter is set to true, and the default wait time is used, which is 4
+	 * seconds. The arbiter will wait for the players to play maximum 4 seconds.
+	 * 
+	 * @param strategy Game strategy to decide who's he winner.
+	 * @param player1  First player.
+	 * @param player2  Second player.
+	 */
 	public Arbiter(GameStrategy strategy, Player player1, Player player2) {
 		this(strategy, player1, player2, true, defaultSecondsToWait);
 	}
 
+	/**
+	 * Create an Arbiter with a given game strategy, two players and if the arbiter
+	 * should wait indefinitely for the players to play. If he arbiter should not
+	 * wait indefinitely, then specify the max wait time in seconds 'secondsToWait'.
+	 * 
+	 * @param strategy      Game strategy to decide who's the winner.
+	 * @param player1       First player.
+	 * @param player2       Second player.
+	 * @param async         Set this to true if the arbiter should not wait forever
+	 *                      for the players to play, and set the wait time in
+	 *                      seconds. In case you want the arbiter to wait until the
+	 *                      players make their move, then set this to false.
+	 * @param secondsToWait Maximum wait time, in seconds, that the arbiter should
+	 *                      wait for the players to play. This number should be
+	 *                      greater than or equal to 1, otherwise it will be
+	 *                      ignored. If 'async' is false, this number is ignored.
+	 */
 	public Arbiter(GameStrategy strategy, Player player1, Player player2, boolean async, int secondsToWait) {
 		Objects.requireNonNull(strategy, "NULL value for 'strategy' is not allowed");
 		Objects.requireNonNull(player1, "NULL value for 'player1' is not allowed");
