@@ -2,6 +2,11 @@ package com.armend.game;
 
 import java.io.PrintStream;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import com.armend.game.components.Item;
 import com.armend.game.components.Player;
@@ -45,12 +50,46 @@ public class Arbiter {
 	 * @return The winning player, or null if there is a tie between them.
 	 */
 	public Player execute() {
-		Item player1Item = player1.play();
-		Item player2Item = player2.play();
+		int waitTime = 4;
+		Item player1Item;
+		Item player2Item;
+		CompletableFuture<Item> future1 = CompletableFuture.supplyAsync(() -> {
+			return player1.play();
+		});
+		CompletableFuture<Item> future2 = CompletableFuture.supplyAsync(() -> {
+			return player2.play();
+		});
+		try {
+			player1Item = future1.get(waitTime, TimeUnit.SECONDS);
+		} catch (InterruptedException | ExecutionException | TimeoutException e) {
+			player1Item = null;
+		}
+		try {
+			player2Item = future2.get(waitTime, TimeUnit.SECONDS);
+		} catch (InterruptedException | ExecutionException | TimeoutException e) {
+			player2Item = null;
+		}
+		ForkJoinPool.commonPool().awaitQuiescence(waitTime, TimeUnit.SECONDS);
+		if (player1Item == null && player2Item == null) {
+			scoreBoard.addRecords("Timed out", "Timed out", "It's a tie");
+			scoreBoard.incrementTies();
+			return null;
+		}
+		if (player1Item == null) {
+			scoreBoard.addRecords("Timed out", player2Item.name(), player2.getName());
+			scoreBoard.incrementSecondPlayersScore();
+			return player2;
+		}
+		if (player2Item == null) {
+			scoreBoard.addRecords(player1Item.name(), "Timed out", player1.getName());
+			scoreBoard.incrementFirstPlayesScore();
+			return player1;
+		}
+
 		Item result = strategy.whoIsTheWinner(player1Item, player2Item);
 		if (result == null) {
 			scoreBoard.addRecords(player1Item.name(), player2Item.name(), "It's a tie");
-			scoreBoard.incementTies();
+			scoreBoard.incrementTies();
 			return null;
 		}
 		if (result == player1Item) {
@@ -61,5 +100,9 @@ public class Arbiter {
 		scoreBoard.addRecords(player1Item.name(), player2Item.name(), player2.getName());
 		scoreBoard.incrementSecondPlayersScore();
 		return player2;
+	}
+
+	public String getLastResult() {
+		return scoreBoard.getLast();
 	}
 }

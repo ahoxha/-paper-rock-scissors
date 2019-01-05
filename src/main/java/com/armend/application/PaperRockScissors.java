@@ -9,7 +9,7 @@ import com.armend.game.strategies.StandardStrategy;
 
 public class PaperRockScissors {
 	public static void main(String[] args) {
-		int n = 10;
+		int n = 5;
 		Player player1 = new ComputerPlayer("Computer");
 		ConsoleUserInput input = new ConsoleUserInput();
 		Player player2 = new HumanPlayer("Armend", input);
@@ -24,10 +24,8 @@ public class PaperRockScissors {
 			} else {
 				System.out.print("It's a tie.");
 			}
-			System.out.print("\t[" + player1.getName() + ": " + player1.getPreviousItem());
-			System.out.println("; " + player2.getName() + ": " + player2.getPreviousItem() + "]");
+			System.out.println(arbiter.getLastResult());
 		}
-		input.close();
 		arbiter.printScores(System.out);
 	}
 }

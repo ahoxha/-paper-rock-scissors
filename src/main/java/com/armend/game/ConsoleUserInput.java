@@ -39,5 +39,4 @@ public class ConsoleUserInput implements UserInput {
 	public void close() {
 		scanner.close();
 	}
-
 }

@@ -45,6 +45,12 @@ public class ScoreBoard {
 		stream.println(builder.toString());
 	}
 
+	public String getLast() {
+		Record r = records.get(records.size() - 1);
+		return String.format(" [%s: %s; %s: %s]", firstPlayer, r.getFirstPlayersChoice(), secondPlayer,
+				r.getSecondPlayersChoice());
+	}
+
 	public void addRecords(String firstPlayersChoise, String secondPlayersChoice, String winner) {
 		records.add(new Record(firstPlayersChoise, secondPlayersChoice, winner));
 	}
@@ -57,7 +63,7 @@ public class ScoreBoard {
 		secondPlayersTotalScore++;
 	}
 
-	public void incementTies() {
+	public void incrementTies() {
 		ties++;
 	}
 
