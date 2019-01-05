@@ -18,7 +18,7 @@ public class PaperRockScissors {
 				+ ", number of rounds: " + n);
 		Arbiter arbiter = new Arbiter(new StandardStrategy(), player1, player2);
 		for (int i = 0; i < n; i++) {
-			Player winner = arbiter.execute();
+			Player winner = arbiter.executeRound();
 			if (winner != null) {
 				System.out.print("Winner: " + winner.getName());
 			} else {

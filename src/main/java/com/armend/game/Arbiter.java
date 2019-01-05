@@ -17,6 +17,7 @@ public class Arbiter {
 	private Player player2;
 	private GameStrategy strategy;
 	private ScoreBoard scoreBoard;
+	private final int SECONDS_TO_WAIT_FOR_PLAYER = 4;
 
 	public Arbiter(GameStrategy strategy, Player player1, Player player2) {
 		Objects.requireNonNull(strategy, "NULL value for 'strategy' is not allowed");
@@ -45,12 +46,13 @@ public class Arbiter {
 	}
 
 	/**
-	 * Ask the players to make the move and decide who is the winner.
+	 * Ask the players to make the move and decide who is the winner. It waits a
+	 * certain time for a player, if the player fails to play on time looses the
+	 * round.
 	 * 
 	 * @return The winning player, or null if there is a tie between them.
 	 */
-	public Player execute() {
-		int waitTime = 4;
+	public Player executeRound() {
 		Item player1Item;
 		Item player2Item;
 		CompletableFuture<Item> future1 = CompletableFuture.supplyAsync(() -> {
@@ -60,16 +62,16 @@ public class Arbiter {
 			return player2.play();
 		});
 		try {
-			player1Item = future1.get(waitTime, TimeUnit.SECONDS);
+			player1Item = future1.get(SECONDS_TO_WAIT_FOR_PLAYER, TimeUnit.SECONDS);
 		} catch (InterruptedException | ExecutionException | TimeoutException e) {
 			player1Item = null;
 		}
 		try {
-			player2Item = future2.get(waitTime, TimeUnit.SECONDS);
+			player2Item = future2.get(SECONDS_TO_WAIT_FOR_PLAYER, TimeUnit.SECONDS);
 		} catch (InterruptedException | ExecutionException | TimeoutException e) {
 			player2Item = null;
 		}
-		ForkJoinPool.commonPool().awaitQuiescence(waitTime, TimeUnit.SECONDS);
+		ForkJoinPool.commonPool().awaitQuiescence(SECONDS_TO_WAIT_FOR_PLAYER, TimeUnit.SECONDS);
 		if (player1Item == null && player2Item == null) {
 			scoreBoard.addRecords("Timed out", "Timed out", "It's a tie");
 			scoreBoard.incrementTies();
@@ -86,6 +88,7 @@ public class Arbiter {
 			return player1;
 		}
 
+		// if both players have made the move, then decide who's the winner
 		Item result = strategy.whoIsTheWinner(player1Item, player2Item);
 		if (result == null) {
 			scoreBoard.addRecords(player1Item.name(), player2Item.name(), "It's a tie");
