@@ -19,18 +19,23 @@ import com.armend.game.components.Item;
 public class StandardStrategy implements GameStrategy {
 
 	private final Map<String, Integer> decisionTable;
+	private static final int TIE = 0;
+	private static final int FIRST_WINS = 1;
+	private static final int SECOND_WINS = 2;
 
 	public StandardStrategy() {
 		decisionTable = new HashMap<>();
-		decisionTable.put(Item.Paper.name() + Item.Rock.name(), 1);
-		decisionTable.put(Item.Rock.name() + Item.Paper.name(), 2);
-		decisionTable.put(Item.Rock.name() + Item.Scissors.name(), 1);
-		decisionTable.put(Item.Scissors.name() + Item.Rock.name(), 2);
-		decisionTable.put(Item.Scissors.name() + Item.Paper.name(), 1);
-		decisionTable.put(Item.Paper.name() + Item.Scissors.name(), 2);
-		decisionTable.put(Item.Rock.name() + Item.Rock.name(), 0);
-		decisionTable.put(Item.Paper.name() + Item.Paper.name(), 0);
-		decisionTable.put(Item.Scissors.name() + Item.Scissors.name(), 0);
+		// The key represents the choice of the first player concatenated by the
+		// second's player choice
+		decisionTable.put(Item.Paper.name() + Item.Rock.name(), FIRST_WINS);
+		decisionTable.put(Item.Rock.name() + Item.Paper.name(), SECOND_WINS);
+		decisionTable.put(Item.Rock.name() + Item.Scissors.name(), FIRST_WINS);
+		decisionTable.put(Item.Scissors.name() + Item.Rock.name(), SECOND_WINS);
+		decisionTable.put(Item.Scissors.name() + Item.Paper.name(), FIRST_WINS);
+		decisionTable.put(Item.Paper.name() + Item.Scissors.name(), SECOND_WINS);
+		decisionTable.put(Item.Rock.name() + Item.Rock.name(), TIE);
+		decisionTable.put(Item.Paper.name() + Item.Paper.name(), TIE);
+		decisionTable.put(Item.Scissors.name() + Item.Scissors.name(), TIE);
 	}
 
 	@Override
