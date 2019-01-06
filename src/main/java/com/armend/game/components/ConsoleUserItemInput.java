@@ -1,14 +1,13 @@
 package com.armend.game.components;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-public class ConsoleUserInput implements ItemInput {
+public class ConsoleUserItemInput implements ItemInput {
 
 	private Scanner scanner;
 
-	public ConsoleUserInput() {
-		scanner = new Scanner(System.in, StandardCharsets.UTF_8.name());
+	public ConsoleUserItemInput(Scanner scanner) {
+		this.scanner = scanner;
 	}
 
 	@Override
@@ -23,9 +22,5 @@ public class ConsoleUserInput implements ItemInput {
 			}
 		} while (item == null);
 		return item;
-	}
-
-	public void close() {
-		scanner.close();
 	}
 }
