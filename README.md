@@ -1,6 +1,6 @@
 # The Paper-Rock-Scissors game
 
-This program is developed in eclise using gradle. It is shipped with **gradle wrapper**, so you don't have to have **gradle** installed to be able to build the project. All you have to do is use `gradlew` instead of `gradle` when you run **gradle** commands.
+This program is developed in eclise using gradle. It is shipped with **gradle wrapper**, so you don't have to have **gradle** installed to be able to build the project. All you have to do is use `gradlew` (or `./gradlew`) instead of `gradle` when you run **gradle** commands.
 
 ## How to build the project?
 
