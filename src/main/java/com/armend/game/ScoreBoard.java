@@ -90,6 +90,14 @@ public class ScoreBoard {
 		return ties;
 	}
 
+	public String getFirstPlayer() {
+		return firstPlayer;
+	}
+
+	public String getSecondPlayer() {
+		return secondPlayer;
+	}
+
 	private static class Record {
 		private String firstPlayersChoice;
 		private String secondPlayersChoice;

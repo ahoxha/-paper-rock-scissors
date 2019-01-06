@@ -103,4 +103,11 @@ public class ScoreBoardTest {
 			assertEquals("The 'secondPlayer' argument must be non-null and non-empty.", e.getMessage());
 		}
 	}
+
+	@Test
+	public void testGetPlayers() {
+		ScoreBoard board = new ScoreBoard("Computer", "John Doe");
+		assertEquals("Computer", board.getFirstPlayer());
+		assertEquals("John Doe", board.getSecondPlayer());
+	}
 }

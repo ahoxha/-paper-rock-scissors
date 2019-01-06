@@ -17,7 +17,8 @@ public class PaperRockScissors {
 		System.out.println("======= Rock Paper Scissors ======");
 		System.out.println("Let's start playing between: " + player1.getName() + " and " + player2.getName()
 				+ ", number of rounds: " + n);
-		Arbiter arbiter = new ImpatientArbiter(new StandardStrategy(), player1, player2, 2);//new Arbiter(new StandardStrategy(), player1, player2);
+		Arbiter arbiter = new ImpatientArbiter(new StandardStrategy(), player1, player2, 2);
+					     //new Arbiter(new StandardStrategy(), player1, player2);
 		for (int i = 0; i < n; i++) {
 			Player winner = arbiter.executeRound();
 			if (winner != null) {
@@ -27,6 +28,7 @@ public class PaperRockScissors {
 			}
 			System.out.println(arbiter.getLastResult());
 		}
+		input.close();
 		arbiter.printScores(System.out);
 	}
 }
