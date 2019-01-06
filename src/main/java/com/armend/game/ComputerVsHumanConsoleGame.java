@@ -19,7 +19,7 @@ public final class ComputerVsHumanConsoleGame {
 	private int rounds;
 	private final static int MIN_ROUNDS = 3;
 	private final static int MAX_ROUNDS = 100;
-	private static Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8.name());
+	private static Scanner scanner;
 
 	private ComputerVsHumanConsoleGame(Player player1, Player player2, int rounds, Arbiter arbiter) {
 		this.player1 = player1;
@@ -29,6 +29,7 @@ public final class ComputerVsHumanConsoleGame {
 	}
 
 	public static ComputerVsHumanConsoleGame initialize() {
+		scanner = new Scanner(System.in, StandardCharsets.UTF_8.name());
 		System.out.println("======= Rock Paper Scissors ======");
 		System.out.println("How many rounds do you want to play? (Min: " + MIN_ROUNDS + ", Max: " + MAX_ROUNDS + "): ");
 		int n = readRoundsFromUser();

@@ -51,6 +51,18 @@ public class Arbiter {
 		scoreBoard.printTo(stream);
 	}
 
+	public int getFirstPlayerTotalScore() {
+		return scoreBoard.getFirstPlayersTotalScore();
+	}
+
+	public int getSecondPlayerTotalScore() {
+		return scoreBoard.getSecondPlayersTotalScore();
+	}
+
+	public int getTies() {
+		return scoreBoard.getTies();
+	}
+
 	/**
 	 * Ask the players to make the move and decide who is the winner. If 'async' is
 	 * true, it waits a certain time for a player, if the player fails to play on

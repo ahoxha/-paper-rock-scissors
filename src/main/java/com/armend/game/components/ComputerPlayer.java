@@ -33,11 +33,4 @@ public class ComputerPlayer extends Player {
 		previousItem = input.get();
 		return previousItem;
 	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append(this.getClass().getSimpleName()).append("{name=").append(getName()).append("}");
-		return builder.toString();
-	}
 }
