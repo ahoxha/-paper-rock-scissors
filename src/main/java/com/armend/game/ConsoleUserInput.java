@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import com.armend.game.components.Item;
 
-public class ConsoleUserInput implements UserInput {
+public class ConsoleUserInput implements ItemInput {
 
 	private Scanner scanner;
 

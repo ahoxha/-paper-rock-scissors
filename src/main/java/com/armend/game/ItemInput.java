@@ -2,6 +2,6 @@ package com.armend.game;
 
 import com.armend.game.components.Item;
 
-public interface UserInput {
+public interface ItemInput {
 	Item get();
 }

@@ -2,13 +2,13 @@ package com.armend.game.components;
 
 import java.util.Objects;
 
-import com.armend.game.UserInput;
+import com.armend.game.ItemInput;
 
 public class HumanPlayer extends Player {
 
-	private UserInput input;
+	private ItemInput input;
 
-	public HumanPlayer(String name, UserInput input) {
+	public HumanPlayer(String name, ItemInput input) {
 		super(name);
 		Objects.requireNonNull(input, "User input must not be null.");
 		this.input = input;

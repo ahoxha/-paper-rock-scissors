@@ -19,9 +19,19 @@ public abstract class Player {
 		return this.name;
 	}
 
+	/**
+	 * Get the item that was chosen previously.
+	 * 
+	 * @return {@link Item}
+	 */
 	public Item getPreviousItem() {
 		return previousItem;
 	}
 
+	/**
+	 * Make the move.
+	 * 
+	 * @return An Item object that you want choose for a given round.
+	 */
 	public abstract Item play();
 }
