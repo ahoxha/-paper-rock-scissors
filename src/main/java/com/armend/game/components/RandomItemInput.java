@@ -1,8 +1,6 @@
-package com.armend.game;
+package com.armend.game.components;
 
 import java.security.SecureRandom;
-
-import com.armend.game.components.Item;
 
 public class RandomItemInput implements ItemInput {
 

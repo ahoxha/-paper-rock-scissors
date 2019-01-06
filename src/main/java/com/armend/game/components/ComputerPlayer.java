@@ -1,8 +1,5 @@
 package com.armend.game.components;
 
-import com.armend.game.ItemInput;
-import com.armend.game.RandomItemInput;
-
 public class ComputerPlayer extends Player {
 
 	private ItemInput input;

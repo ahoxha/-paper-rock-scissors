@@ -1,9 +1,9 @@
 package com.armend.application;
 
 import com.armend.game.Arbiter;
-import com.armend.game.ConsoleUserInput;
 import com.armend.game.ImpatientArbiter;
 import com.armend.game.components.ComputerPlayer;
+import com.armend.game.components.ConsoleUserInput;
 import com.armend.game.components.HumanPlayer;
 import com.armend.game.components.Player;
 import com.armend.game.strategies.StandardStrategy;

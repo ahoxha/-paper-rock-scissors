@@ -2,8 +2,6 @@ package com.armend.game.components;
 
 import java.util.Objects;
 
-import com.armend.game.ItemInput;
-
 public class HumanPlayer extends Player {
 
 	private ItemInput input;

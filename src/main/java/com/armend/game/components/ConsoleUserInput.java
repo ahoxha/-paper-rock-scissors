@@ -1,9 +1,7 @@
-package com.armend.game;
+package com.armend.game.components;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
-
-import com.armend.game.components.Item;
 
 public class ConsoleUserInput implements ItemInput {
 
