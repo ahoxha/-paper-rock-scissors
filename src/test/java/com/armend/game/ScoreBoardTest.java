@@ -110,4 +110,24 @@ public class ScoreBoardTest {
 		assertEquals("Computer", board.getFirstPlayer());
 		assertEquals("John Doe", board.getSecondPlayer());
 	}
+
+	@Test
+	public void testNewScoreBoardWithEmptyFirstPlayer() {
+		try {
+			new ScoreBoard("", "test");
+			fail("Should not have reached this ppint, you must provide non-empty names for both players.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("The 'firstPlayer' argument must be non-null and non-empty.", e.getMessage());
+		}
+	}
+
+	@Test
+	public void testNewScoreBoardWithEmptySecondPlayer() {
+		try {
+			new ScoreBoard("Test", "");
+			fail("Should not have reached this ppint, you must provide non-empty names for both players.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("The 'secondPlayer' argument must be non-null and non-empty.", e.getMessage());
+		}
+	}
 }

@@ -1,5 +1,8 @@
 package com.armend.game.integration;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import java.io.StringReader;
 
 import org.junit.jupiter.api.Test;
@@ -10,9 +13,6 @@ import com.armend.game.components.HumanPlayer;
 import com.armend.game.components.ItemInput;
 import com.armend.game.components.Player;
 import com.armend.game.strategies.StandardStrategy;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class HumanVsHumanGameTest {
 
@@ -27,12 +27,14 @@ public class HumanVsHumanGameTest {
 		Arbiter arbiter = new Arbiter(new StandardStrategy(), player1, player2);
 
 		assertEquals(player1, arbiter.executeRound());
+		assertEquals(" [Player1: Scissors; Player2: Paper]", arbiter.getLastResult());
 		assertEquals(player2, arbiter.executeRound());
 		assertEquals(player1, arbiter.executeRound());
 		assertNull(arbiter.executeRound());
 		assertEquals(2, arbiter.getFirstPlayerTotalScore());
 		assertEquals(1, arbiter.getSecondPlayerTotalScore());
 		assertEquals(1, arbiter.getTies());
+		assertEquals(" [Player1: Rock; Player2: Rock]", arbiter.getLastResult());
 	}
 
 	@Test

@@ -1,9 +1,10 @@
-package com.armend.game;
+package com.armend.application;
 
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+import com.armend.game.Arbiter;
 import com.armend.game.components.ComputerPlayer;
 import com.armend.game.components.ConsoleUserItemInput;
 import com.armend.game.components.HumanPlayer;

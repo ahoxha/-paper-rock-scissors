@@ -104,4 +104,8 @@ public class ImpatientArbiter extends Arbiter {
 			return null;
 		}
 	}
+
+	public int getSecondsToWait() {
+		return this.secondsToWait;
+	}
 }

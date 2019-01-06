@@ -25,4 +25,13 @@ public class HumanPlayerTest {
 			assertEquals("The 'input' argument must not be null.", e.getMessage());
 		}
 	}
+
+	@Test
+	public void testNewHumanPlayerWithEmptyName() {
+		try {
+			new HumanPlayer("", null);
+		} catch (IllegalArgumentException e) {
+			assertEquals("The 'name' argument must be non-null and non-empty.", e.getMessage());
+		}
+	}
 }
