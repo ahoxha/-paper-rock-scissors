@@ -1,5 +1,7 @@
 package com.armend.game.components;
 
+import java.util.Objects;
+
 import com.armend.game.UserInput;
 
 public class HumanPlayer extends Player {
@@ -8,9 +10,7 @@ public class HumanPlayer extends Player {
 
 	public HumanPlayer(String name, UserInput input) {
 		super(name);
-		if (input == null) {
-			throw new IllegalArgumentException("User input must not be null.");
-		}
+		Objects.requireNonNull(input, "User input must not be null.");
 		this.input = input;
 	}
 

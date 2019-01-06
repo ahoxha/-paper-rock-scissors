@@ -24,7 +24,7 @@ public class Arbiter {
 	public Arbiter(GameStrategy strategy, Player player1, Player player2) {
 		Objects.requireNonNull(strategy, "NULL value for 'strategy' is not allowed");
 		Objects.requireNonNull(player1, "NULL value for 'player1' is not allowed");
-		Objects.requireNonNull(player2, "NULL value for 'player2' is not allwed");
+		Objects.requireNonNull(player2, "NULL value for 'player2' is not allowed");
 		this.strategy = strategy;
 		this.player1 = player1;
 		this.player2 = player2;
@@ -41,6 +41,10 @@ public class Arbiter {
 		if (strategy != null) {
 			this.strategy = strategy;
 		}
+	}
+
+	public GameStrategy getStrategy() {
+		return this.strategy;
 	}
 
 	public void printScores(PrintStream stream) {

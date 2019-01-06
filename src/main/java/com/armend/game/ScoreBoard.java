@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ScoreBoard {
 
-	private List<Record> records = new ArrayList<>();
+	private List<Record> records;
 	private String firstPlayer;
 	private String secondPlayer;
 	private int firstPlayersTotalScore;
@@ -16,6 +16,7 @@ public class ScoreBoard {
 	public ScoreBoard(String firstPlayer, String secondPlayer) {
 		this.firstPlayer = firstPlayer;
 		this.secondPlayer = secondPlayer;
+		records = new ArrayList<>();
 	}
 
 	public void printTo(PrintStream stream) {
@@ -45,6 +46,9 @@ public class ScoreBoard {
 	}
 
 	public String getLast() {
+		if (records.isEmpty()) {
+			return "";
+		}
 		Record r = records.get(records.size() - 1);
 		return String.format(" [%s: %s; %s: %s]", firstPlayer, r.getFirstPlayersChoice(), secondPlayer,
 				r.getSecondPlayersChoice());
@@ -64,6 +68,18 @@ public class ScoreBoard {
 
 	public void incrementTies() {
 		ties++;
+	}
+
+	public int getFirstPlayersTotalScore() {
+		return firstPlayersTotalScore;
+	}
+
+	public int getSecondPlayersTotalScore() {
+		return secondPlayersTotalScore;
+	}
+
+	public int getTies() {
+		return ties;
 	}
 
 	private static class Record {
