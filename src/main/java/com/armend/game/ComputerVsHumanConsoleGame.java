@@ -1,11 +1,13 @@
 package com.armend.game;
 
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 import com.armend.game.components.ComputerPlayer;
 import com.armend.game.components.ConsoleUserItemInput;
 import com.armend.game.components.HumanPlayer;
+import com.armend.game.components.ItemInput;
 import com.armend.game.components.Player;
 import com.armend.game.strategies.GameStrategy;
 import com.armend.game.strategies.StandardStrategy;
@@ -33,8 +35,9 @@ public final class ComputerVsHumanConsoleGame {
 		System.out.println("Type your name:");
 		String name = scanner.nextLine();
 
+		ItemInput humanInput = new ConsoleUserItemInput(new InputStreamReader(System.in, StandardCharsets.UTF_8));
 		Player computerPlayer = new ComputerPlayer("Computer");
-		Player humanPlayer = new HumanPlayer(name, new ConsoleUserItemInput(scanner));
+		Player humanPlayer = new HumanPlayer(name, humanInput);
 		GameStrategy strategy = new StandardStrategy();
 		Arbiter arbiter = new Arbiter(strategy, computerPlayer, humanPlayer);
 		return new ComputerVsHumanConsoleGame(computerPlayer, humanPlayer, n, arbiter);

@@ -1,26 +1,37 @@
 package com.armend.game.components;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.Reader;
 
 public class ConsoleUserItemInput implements ItemInput {
+	private BufferedReader reader;
 
-	private Scanner scanner;
-
-	public ConsoleUserItemInput(Scanner scanner) {
-		this.scanner = scanner;
+	public ConsoleUserItemInput(Reader reader) {
+		this.reader = new BufferedReader(reader);
 	}
 
 	@Override
 	public Item get() {
 		Item item = null;
+		int tries = 3;
 		do {
 			System.out.println("Type S for Scissors, R for Rock, P for Paper:");
-			String input = scanner.nextLine();
+			String input;
+			try {
+				input = reader.readLine();
+			} catch (IOException e) {
+				input = "";
+			}
 			item = Item.of(input);
 			if (item == null) {
 				System.err.println("Wrong input: " + input);
 			}
-		} while (item == null);
+			tries--;
+		} while (item == null && tries > 0);
+		if (item == null) {
+			System.out.print("Failed to get a valid input after 3 consequetive tries.");
+		}
 		return item;
 	}
 }
