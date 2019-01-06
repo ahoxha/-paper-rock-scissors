@@ -1,20 +1,21 @@
 package com.armend.game;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
 public class ScoreBoardTest {
 	@Test
 	public void testGetLastWithEmptyScoreBoard() {
 		ScoreBoard board = new ScoreBoard("player1", "player2");
-		Assertions.assertEquals("", board.getLast());
+		assertEquals("", board.getLast());
 	}
 
 	@Test
 	public void testGetLastWithOneRecordScoreBoard() {
 		ScoreBoard board = new ScoreBoard("player1", "player2");
 		board.addRecords("Scissors", "Rock", "player2");
-		Assertions.assertEquals(" [player1: Scissors; player2: Rock]", board.getLast());
+		assertEquals(" [player1: Scissors; player2: Rock]", board.getLast());
 	}
 
 	@Test
@@ -23,7 +24,7 @@ public class ScoreBoardTest {
 		board.addRecords("Rock", "Rock", "It's a tie");
 		board.addRecords("Scissors", "Paper", "player1");
 		board.addRecords("Paper", "Paper", "It's a tie");
-		Assertions.assertEquals(" [player1: Paper; player2: Paper]", board.getLast());
+		assertEquals(" [player1: Paper; player2: Paper]", board.getLast());
 	}
 
 	@Test
@@ -31,20 +32,20 @@ public class ScoreBoardTest {
 		ScoreBoard board = new ScoreBoard("Playe1", "Player2");
 		board.incrementFirstPlayesScore();
 		board.incrementFirstPlayesScore();
-		Assertions.assertEquals(2, board.getFirstPlayersTotalScore());
+		assertEquals(2, board.getFirstPlayersTotalScore());
 		// make sure when first incremented doesn't affect the others
-		Assertions.assertEquals(0, board.getSecondPlayersTotalScore());
-		Assertions.assertEquals(0, board.getTies());
+		assertEquals(0, board.getSecondPlayersTotalScore());
+		assertEquals(0, board.getTies());
 	}
 
 	@Test
 	public void testIncrementSecondPlayersScore() {
 		ScoreBoard board = new ScoreBoard("Player1", "Player2");
 		board.incrementSecondPlayersScore();
-		Assertions.assertEquals(1, board.getSecondPlayersTotalScore());
+		assertEquals(1, board.getSecondPlayersTotalScore());
 		// make sure when second incremented doesn't affect the others
-		Assertions.assertEquals(0, board.getFirstPlayersTotalScore());
-		Assertions.assertEquals(0, board.getTies());
+		assertEquals(0, board.getFirstPlayersTotalScore());
+		assertEquals(0, board.getTies());
 	}
 
 	@Test
@@ -53,10 +54,10 @@ public class ScoreBoardTest {
 		board.incrementTies();
 		board.incrementTies();
 		board.incrementTies();
-		Assertions.assertEquals(3, board.getTies());
+		assertEquals(3, board.getTies());
 		// make sure when ties incremented doesn't affect the others
-		Assertions.assertEquals(0, board.getFirstPlayersTotalScore());
-		Assertions.assertEquals(0, board.getSecondPlayersTotalScore());
+		assertEquals(0, board.getFirstPlayersTotalScore());
+		assertEquals(0, board.getSecondPlayersTotalScore());
 	}
 
 	@Test
@@ -68,9 +69,9 @@ public class ScoreBoardTest {
 		board.incrementSecondPlayersScore();
 		board.incrementTies();
 		board.incrementSecondPlayersScore();
-		Assertions.assertEquals(1, board.getTies());
-		Assertions.assertEquals(2, board.getFirstPlayersTotalScore());
-		Assertions.assertEquals(3, board.getSecondPlayersTotalScore());
+		assertEquals(1, board.getTies());
+		assertEquals(2, board.getFirstPlayersTotalScore());
+		assertEquals(3, board.getSecondPlayersTotalScore());
 	}
 
 	@Test
@@ -78,10 +79,9 @@ public class ScoreBoardTest {
 		ScoreBoard board = new ScoreBoard("Player1", "Player2");
 		try {
 			board.printTo(null);
-			Assertions
-					.fail("Should not have reached this point, the 'printTo' method requires a non-null PrintStream.");
+			fail("Should not have reached this point, the 'printTo' method requires a non-null PrintStream.");
 		} catch (NullPointerException e) {
-			Assertions.assertEquals("Please provide a non-null PrintStream.", e.getMessage());
+			assertEquals("Please provide a non-null PrintStream.", e.getMessage());
 		}
 	}
 
@@ -89,9 +89,9 @@ public class ScoreBoardTest {
 	public void testNewScoreBoardWithNullFirstPlayer() {
 		try {
 			new ScoreBoard(null, "test");
-			Assertions.fail("Should not have reached this ppint, you must provide non-empty names for both players.");
+			fail("Should not have reached this ppint, you must provide non-empty names for both players.");
 		} catch (IllegalArgumentException e) {
-			Assertions.assertEquals("The 'firstPlayer' argument must be non-null and non-empty.", e.getMessage());
+			assertEquals("The 'firstPlayer' argument must be non-null and non-empty.", e.getMessage());
 		}
 	}
 
@@ -100,7 +100,7 @@ public class ScoreBoardTest {
 		try {
 			new ScoreBoard("Player1", null);
 		} catch (IllegalArgumentException e) {
-			Assertions.assertEquals("The 'secondPlayer' argument must be non-null and non-empty.", e.getMessage());
+			assertEquals("The 'secondPlayer' argument must be non-null and non-empty.", e.getMessage());
 		}
 	}
 }
