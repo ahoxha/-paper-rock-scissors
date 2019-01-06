@@ -26,7 +26,6 @@ public class ScoreBoard {
 			builder.append("-");
 		}
 		builder.append("+");
-		stream.println(builder.toString());
 		stream.println("\n================ Score Board =========================");
 		stream.println(builder.toString());
 		String format = "| %" + columnWidth + "s | %" + columnWidth + "s | %" + columnWidth + "s |";
