@@ -5,10 +5,9 @@ import java.util.Scanner;
 
 import com.armend.game.components.Item;
 
-public class ConsoleUserInput implements UserInput {
+public class ConsoleUserInput implements ItemInput {
 
 	private Scanner scanner;
-	private final int MAX_TRIES = 5;
 
 	public ConsoleUserInput() {
 		scanner = new Scanner(System.in, StandardCharsets.UTF_8.name());
@@ -16,28 +15,19 @@ public class ConsoleUserInput implements UserInput {
 
 	@Override
 	public Item get() {
-		int tries = 0;
 		Item item = null;
 		do {
 			System.out.println("Type S for Scissors, R for Rock, P for Paper:");
-			String input = scanner.nextLine().toUpperCase();
-			if (input.equals("S")) {
-				item = Item.Scissors;
-			} else if (input.equals("P")) {
-				item = Item.Paper;
-			} else if (input.equals("R")) {
-				item = Item.Rock;
-			}
+			String input = scanner.nextLine();
+			item = Item.of(input);
 			if (item == null) {
-				System.err.println("Wrong value: " + input);
+				System.err.println("Wrong input: " + input);
 			}
-			tries++;
-		} while (item == null && tries < MAX_TRIES);
+		} while (item == null);
 		return item;
 	}
 
 	public void close() {
 		scanner.close();
 	}
-
 }

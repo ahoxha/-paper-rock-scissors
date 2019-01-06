@@ -1,21 +1,36 @@
 package com.armend.game.components;
 
-import java.security.SecureRandom;
+import com.armend.game.ItemInput;
+import com.armend.game.RandomItemInput;
 
 public class ComputerPlayer extends Player {
 
-	private SecureRandom random;
-	private Item[] components;
+	private ItemInput input;
 
+	/**
+	 * Constructs a ComputerPlayer object with a RandomItemInput.
+	 * 
+	 * @param name Name of the player.
+	 */
 	public ComputerPlayer(String name) {
+		this(name, new RandomItemInput());
+	}
+
+	/**
+	 * Constructs a ComputerPlayer object with the given ItemInput.
+	 * 
+	 * @param name  Name of the player.
+	 * @param input ItemInput from which items will be retrieved while playing the
+	 *              game.
+	 */
+	public ComputerPlayer(String name, ItemInput input) {
 		super(name);
-		random = new SecureRandom();
-		components = Item.values();
+		this.input = input;
 	}
 
 	@Override
 	public Item play() {
-		previousItem = components[random.nextInt(components.length)];
+		previousItem = input.get();
 		return previousItem;
 	}
 

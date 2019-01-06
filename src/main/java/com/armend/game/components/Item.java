@@ -1,5 +1,11 @@
 package com.armend.game.components;
 
+/**
+ * Specifies the items for the Paper - Rock Scissors game.
+ * 
+ * @author armend.hoxha
+ *
+ */
 public enum Item {
 	Paper, Rock, Scissors;
 
