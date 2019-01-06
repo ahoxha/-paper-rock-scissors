@@ -12,6 +12,9 @@ public abstract class Player {
 	protected Item previousItem;
 
 	public Player(String name) {
+		if (name == null || name.isEmpty()) {
+			throw new IllegalArgumentException("The 'name' argument must be non-null and non-empty.");
+		}
 		this.name = name;
 	}
 
@@ -20,9 +23,9 @@ public abstract class Player {
 	}
 
 	/**
-	 * Get the item that was chosen previously.
+	 * Get the item that was chosen previously or null if there is none.
 	 * 
-	 * @return {@link Item}
+	 * @return {@link Item} or null.
 	 */
 	public Item getPreviousItem() {
 		return previousItem;

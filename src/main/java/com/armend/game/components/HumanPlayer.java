@@ -8,7 +8,7 @@ public class HumanPlayer extends Player {
 
 	public HumanPlayer(String name, ItemInput input) {
 		super(name);
-		Objects.requireNonNull(input, "User input must not be null.");
+		Objects.requireNonNull(input, "The 'input' argument must not be null.");
 		this.input = input;
 	}
 

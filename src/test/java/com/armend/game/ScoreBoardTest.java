@@ -72,4 +72,35 @@ public class ScoreBoardTest {
 		Assertions.assertEquals(2, board.getFirstPlayersTotalScore());
 		Assertions.assertEquals(3, board.getSecondPlayersTotalScore());
 	}
+
+	@Test
+	public void testPrintWithNullPrintStream() {
+		ScoreBoard board = new ScoreBoard("Player1", "Player2");
+		try {
+			board.printTo(null);
+			Assertions
+					.fail("Should not have reached this point, the 'printTo' method requires a non-null PrintStream.");
+		} catch (NullPointerException e) {
+			Assertions.assertEquals("Please provide a non-null PrintStream.", e.getMessage());
+		}
+	}
+
+	@Test
+	public void testNewScoreBoardWithNullFirstPlayer() {
+		try {
+			new ScoreBoard(null, "test");
+			Assertions.fail("Should not have reached this ppint, you must provide non-empty names for both players.");
+		} catch (IllegalArgumentException e) {
+			Assertions.assertEquals("The 'firstPlayer' argument must be non-null and non-empty.", e.getMessage());
+		}
+	}
+
+	@Test
+	public void testNewScoreBoardWithNullSecondPlayer() {
+		try {
+			new ScoreBoard("Player1", null);
+		} catch (IllegalArgumentException e) {
+			Assertions.assertEquals("The 'secondPlayer' argument must be non-null and non-empty.", e.getMessage());
+		}
+	}
 }

@@ -3,6 +3,7 @@ package com.armend.game;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ScoreBoard {
 
@@ -14,12 +15,19 @@ public class ScoreBoard {
 	private int ties;
 
 	public ScoreBoard(String firstPlayer, String secondPlayer) {
+		if (firstPlayer == null || firstPlayer.isEmpty()) {
+			throw new IllegalArgumentException("The 'firstPlayer' argument must be non-null and non-empty.");
+		}
+		if (secondPlayer == null || secondPlayer.isEmpty()) {
+			throw new IllegalArgumentException("The 'secondPlayer' argument must be non-null and non-empty.");
+		}
 		this.firstPlayer = firstPlayer;
 		this.secondPlayer = secondPlayer;
 		records = new ArrayList<>();
 	}
 
 	public void printTo(PrintStream stream) {
+		Objects.requireNonNull(stream, "Please provide a non-null PrintStream.");
 		int columnWidth = -35;
 		StringBuilder builder = new StringBuilder();
 		builder.append("+");

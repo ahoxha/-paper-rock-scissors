@@ -1,5 +1,7 @@
 package com.armend.game.components;
 
+import java.util.Objects;
+
 public class ComputerPlayer extends Player {
 
 	private ItemInput input;
@@ -22,6 +24,7 @@ public class ComputerPlayer extends Player {
 	 */
 	public ComputerPlayer(String name, ItemInput input) {
 		super(name);
+		Objects.requireNonNull(input, "The 'input' argument must not be null.");
 		this.input = input;
 	}
 
