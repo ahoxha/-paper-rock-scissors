@@ -7,7 +7,17 @@ package com.armend.game.components;
  *
  */
 public enum Item {
-	Paper, Rock, Scissors;
+	Rock(0), Paper(1), Scissors(2);
+
+	private final int index;
+
+	Item(int index) {
+		this.index = index;
+	}
+
+	public int getIndex() {
+		return this.index;
+	}
 
 	/**
 	 * Return the item that 's' matches with (case insensitive).

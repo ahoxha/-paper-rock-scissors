@@ -2,6 +2,7 @@ package com.armend.game.components;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,5 +28,12 @@ public class ItemTest {
 	@Test
 	public void testOfWithWrongNonEmptyString() {
 		assertNull(Item.of("Bla Bla"));
+	}
+
+	@Test
+	public void ensureIndices() {
+		assertEquals(0, Item.Rock.getIndex(), Item.Rock + " must have index = 0");
+		assertEquals(1, Item.Paper.getIndex(), Item.Paper + " must have index = 1");
+		assertEquals(2, Item.Scissors.getIndex(), Item.Scissors + " must have index = 2");
 	}
 }

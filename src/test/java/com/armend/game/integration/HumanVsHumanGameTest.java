@@ -49,7 +49,7 @@ public class HumanVsHumanGameTest {
 		try {
 			assertEquals(player1, arbiter.executeRound());
 		} catch (IllegalArgumentException e) {
-			assertEquals("item1 should not be null", e.getMessage());
+			assertEquals("firstItem should not be null", e.getMessage());
 		}
 		assertEmptyScoreBoard(arbiter);
 	}
@@ -66,7 +66,7 @@ public class HumanVsHumanGameTest {
 		try {
 			assertEquals(player1, arbiter.executeRound());
 		} catch (IllegalArgumentException e) {
-			assertEquals("item2 should not be null", e.getMessage());
+			assertEquals("secondItem should not be null", e.getMessage());
 		}
 		assertEmptyScoreBoard(arbiter);
 	}

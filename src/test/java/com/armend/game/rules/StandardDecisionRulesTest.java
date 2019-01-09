@@ -1,4 +1,4 @@
-package com.armend.game.strategies;
+package com.armend.game.rules;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -10,7 +10,7 @@ import com.armend.game.components.Item;
 import com.armend.game.rules.DecisionRules;
 import com.armend.game.rules.StandardDecisionRules;
 
-public class StandardStrategyTest {
+public class StandardDecisionRulesTest {
 
 	private static DecisionRules strategy;
 
@@ -70,7 +70,7 @@ public class StandardStrategyTest {
 			strategy.whoIsTheWinner(null, Item.Paper);
 			fail("Should have thrown an IllegalArgumentException");
 		} catch (IllegalArgumentException e) {
-			assertEquals("item1 should not be null", e.getMessage());
+			assertEquals("firstItem should not be null", e.getMessage());
 		}
 	}
 
@@ -80,7 +80,7 @@ public class StandardStrategyTest {
 			strategy.whoIsTheWinner(Item.Rock, null);
 			fail("Should have thrown an IllegalArgumentException");
 		} catch (IllegalArgumentException e) {
-			assertEquals("item2 should not be null", e.getMessage());
+			assertEquals("secondItem should not be null", e.getMessage());
 		}
 	}
 
@@ -90,7 +90,7 @@ public class StandardStrategyTest {
 			strategy.whoIsTheWinner(null, null);
 			fail("Should have thrown an IllegalArgumentException");
 		} catch (IllegalArgumentException e) {
-			assertEquals("item1 should not be null", e.getMessage());
+			assertEquals("firstItem should not be null", e.getMessage());
 		}
 	}
 }
