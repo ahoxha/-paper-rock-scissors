@@ -2,9 +2,11 @@ package com.armend.application;
 
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import com.armend.game.Arbiter;
+import com.armend.game.ImpatientArbiter;
 import com.armend.game.components.ComputerPlayer;
 import com.armend.game.components.ConsoleUserItemInput;
 import com.armend.game.components.HumanPlayer;
@@ -36,13 +38,25 @@ public final class ComputerVsHumanConsoleGame {
 		int n = readRoundsFromUser();
 		System.out.println("Type your name:");
 		String name = scanner.nextLine();
-
 		ItemInput humanInput = new ConsoleUserItemInput(new InputStreamReader(System.in, StandardCharsets.UTF_8));
 		Player computerPlayer = new ComputerPlayer("Computer");
 		Player humanPlayer = new HumanPlayer(name, humanInput);
 		DecisionRules strategy = new StandardDecisionRules();
-		Arbiter arbiter = new Arbiter(strategy, computerPlayer, humanPlayer);
+		Arbiter arbiter = isTimed() ? new ImpatientArbiter(strategy, computerPlayer, humanPlayer, 3)
+				: new Arbiter(strategy, computerPlayer, humanPlayer);
 		return new ComputerVsHumanConsoleGame(computerPlayer, humanPlayer, n, arbiter);
+	}
+
+	private static boolean isTimed() {
+		System.out.println(
+				"Type T for a timed game (You have a limited time to make the move, if you don't play on time you loose the round.");
+		System.out.println("Type U for an untimed game (the program will wait indefitely for the user's input.)");
+		System.out.println("If you don't give the right input (either T or U), the program will start a timed game.");
+		try {
+			return !"U".equals(scanner.nextLine().toUpperCase());
+		} catch (NoSuchElementException | IllegalStateException e) {
+			return true;
+		}
 	}
 
 	private static int readRoundsFromUser() {
