@@ -7,14 +7,16 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.armend.game.components.Item;
+import com.armend.game.rules.DecisionRules;
+import com.armend.game.rules.StandardDecisionRules;
 
 public class StandardStrategyTest {
 
-	private static GameStrategy strategy;
+	private static DecisionRules strategy;
 
 	@BeforeAll
 	public static void initializeStrategy() {
-		strategy = new StandardStrategy();
+		strategy = new StandardDecisionRules();
 	}
 
 	@Test

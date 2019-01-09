@@ -5,12 +5,12 @@ import java.util.Objects;
 
 import com.armend.game.components.Item;
 import com.armend.game.components.Player;
-import com.armend.game.strategies.GameStrategy;
+import com.armend.game.rules.DecisionRules;
 
 public class Arbiter {
 	protected Player player1;
 	protected Player player2;
-	protected GameStrategy strategy;
+	protected DecisionRules strategy;
 	protected ScoreBoard scoreBoard;
 
 	/**
@@ -21,7 +21,7 @@ public class Arbiter {
 	 * @param player1  First player.
 	 * @param player2  Second player.
 	 */
-	public Arbiter(GameStrategy strategy, Player player1, Player player2) {
+	public Arbiter(DecisionRules strategy, Player player1, Player player2) {
 		Objects.requireNonNull(strategy, "NULL value for 'strategy' is not allowed");
 		Objects.requireNonNull(player1, "NULL value for 'player1' is not allowed");
 		Objects.requireNonNull(player2, "NULL value for 'player2' is not allowed");
@@ -37,13 +37,13 @@ public class Arbiter {
 	 * 
 	 * @param strategy The new game strategy to be used by the arbiter.
 	 */
-	public void setStrategy(GameStrategy strategy) {
+	public void setStrategy(DecisionRules strategy) {
 		if (strategy != null) {
 			this.strategy = strategy;
 		}
 	}
 
-	public GameStrategy getStrategy() {
+	public DecisionRules getStrategy() {
 		return this.strategy;
 	}
 

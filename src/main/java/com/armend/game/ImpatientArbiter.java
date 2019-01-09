@@ -8,7 +8,7 @@ import java.util.concurrent.TimeoutException;
 
 import com.armend.game.components.Item;
 import com.armend.game.components.Player;
-import com.armend.game.strategies.GameStrategy;
+import com.armend.game.rules.DecisionRules;
 
 /**
  * Models an arbiter that doesn't wait forever for the players to play. It waits
@@ -36,7 +36,7 @@ public class ImpatientArbiter extends Arbiter {
 	 *                      greater than or equal to 1, otherwise it will be
 	 *                      ignored, and the default value will be used.
 	 */
-	public ImpatientArbiter(GameStrategy strategy, Player player1, Player player2, int secondsToWait) {
+	public ImpatientArbiter(DecisionRules strategy, Player player1, Player player2, int secondsToWait) {
 		super(strategy, player1, player2);
 		this.secondsToWait = secondsToWait < 1 ? defaultSecondsToWait : secondsToWait;
 	}

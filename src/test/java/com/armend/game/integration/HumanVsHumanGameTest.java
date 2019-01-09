@@ -12,7 +12,7 @@ import com.armend.game.components.ConsoleUserItemInput;
 import com.armend.game.components.HumanPlayer;
 import com.armend.game.components.ItemInput;
 import com.armend.game.components.Player;
-import com.armend.game.strategies.StandardStrategy;
+import com.armend.game.rules.StandardDecisionRules;
 
 public class HumanVsHumanGameTest {
 
@@ -24,7 +24,7 @@ public class HumanVsHumanGameTest {
 		ItemInput player2Input = new ConsoleUserItemInput(new StringReader("P\nS\nS\nR"));
 		Player player2 = new HumanPlayer("Player2", player2Input);
 
-		Arbiter arbiter = new Arbiter(new StandardStrategy(), player1, player2);
+		Arbiter arbiter = new Arbiter(new StandardDecisionRules(), player1, player2);
 
 		assertEquals(player1, arbiter.executeRound());
 		assertEquals(" [Player1: Scissors; Player2: Paper]", arbiter.getLastResult());
@@ -45,7 +45,7 @@ public class HumanVsHumanGameTest {
 		ItemInput player2Input = new ConsoleUserItemInput(new StringReader("R"));
 		Player player2 = new HumanPlayer("Player2", player2Input);
 
-		Arbiter arbiter = new Arbiter(new StandardStrategy(), player1, player2);
+		Arbiter arbiter = new Arbiter(new StandardDecisionRules(), player1, player2);
 		try {
 			assertEquals(player1, arbiter.executeRound());
 		} catch (IllegalArgumentException e) {
@@ -62,7 +62,7 @@ public class HumanVsHumanGameTest {
 		ItemInput player2Input = new ConsoleUserItemInput(new StringReader("A"));
 		Player player2 = new HumanPlayer("Player2", player2Input);
 
-		Arbiter arbiter = new Arbiter(new StandardStrategy(), player1, player2);
+		Arbiter arbiter = new Arbiter(new StandardDecisionRules(), player1, player2);
 		try {
 			assertEquals(player1, arbiter.executeRound());
 		} catch (IllegalArgumentException e) {

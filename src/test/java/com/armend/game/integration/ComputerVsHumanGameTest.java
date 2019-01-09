@@ -14,7 +14,7 @@ import com.armend.game.components.ConsoleUserItemInput;
 import com.armend.game.components.HumanPlayer;
 import com.armend.game.components.ItemInput;
 import com.armend.game.components.Player;
-import com.armend.game.strategies.StandardStrategy;
+import com.armend.game.rules.StandardDecisionRules;
 
 public class ComputerVsHumanGameTest {
 	@Test
@@ -25,7 +25,7 @@ public class ComputerVsHumanGameTest {
 		ItemInput computerInput = new ConsoleUserItemInput(new StringReader("P\nS\nS\nR"));
 		Player computer = new ComputerPlayer("Computer", computerInput);
 
-		Arbiter arbiter = new ImpatientArbiter(new StandardStrategy(), human, computer, 2);
+		Arbiter arbiter = new ImpatientArbiter(new StandardDecisionRules(), human, computer, 2);
 
 		assertEquals(human, arbiter.executeRound());
 		assertEquals(computer, arbiter.executeRound());
@@ -43,7 +43,7 @@ public class ComputerVsHumanGameTest {
 
 		Player computer = new ComputerPlayer("Computer");
 
-		Arbiter arbiter = new ImpatientArbiter(new StandardStrategy(), human, computer, 2);
+		Arbiter arbiter = new ImpatientArbiter(new StandardDecisionRules(), human, computer, 2);
 		// we don't know who is the winner since the computer player chooses randomly
 		arbiter.executeRound();
 		arbiter.executeRound();
@@ -58,7 +58,7 @@ public class ComputerVsHumanGameTest {
 
 		Player computer = new ComputerPlayer("Computer");
 
-		Arbiter arbiter = new ImpatientArbiter(new StandardStrategy(), human, computer, 2);
+		Arbiter arbiter = new ImpatientArbiter(new StandardDecisionRules(), human, computer, 2);
 		assertEquals(computer, arbiter.executeRound());
 		assertEquals(1, arbiter.getSecondPlayerTotalScore());
 		assertEquals(0, arbiter.getFirstPlayerTotalScore());

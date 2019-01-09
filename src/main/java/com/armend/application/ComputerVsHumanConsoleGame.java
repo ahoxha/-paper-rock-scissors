@@ -10,8 +10,8 @@ import com.armend.game.components.ConsoleUserItemInput;
 import com.armend.game.components.HumanPlayer;
 import com.armend.game.components.ItemInput;
 import com.armend.game.components.Player;
-import com.armend.game.strategies.GameStrategy;
-import com.armend.game.strategies.StandardStrategy;
+import com.armend.game.rules.DecisionRules;
+import com.armend.game.rules.StandardDecisionRules;
 
 public final class ComputerVsHumanConsoleGame {
 	private Player player1;
@@ -40,7 +40,7 @@ public final class ComputerVsHumanConsoleGame {
 		ItemInput humanInput = new ConsoleUserItemInput(new InputStreamReader(System.in, StandardCharsets.UTF_8));
 		Player computerPlayer = new ComputerPlayer("Computer");
 		Player humanPlayer = new HumanPlayer(name, humanInput);
-		GameStrategy strategy = new StandardStrategy();
+		DecisionRules strategy = new StandardDecisionRules();
 		Arbiter arbiter = new Arbiter(strategy, computerPlayer, humanPlayer);
 		return new ComputerVsHumanConsoleGame(computerPlayer, humanPlayer, n, arbiter);
 	}

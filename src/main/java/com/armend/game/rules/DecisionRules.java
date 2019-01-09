@@ -1,14 +1,15 @@
-package com.armend.game.strategies;
+package com.armend.game.rules;
 
 import com.armend.game.components.Item;
 
 /**
- * Represents a game strategy for playing the Rock-Paper-Scissors game.
+ * Represents a set of rules for deciding the winner in the Rock-Paper-Scissors
+ * game.
  * 
  * @author armend.hoxha
  *
  */
-public interface GameStrategy {
+public interface DecisionRules {
 	/**
 	 * Decides which item is the winner and returns the winning item. If there is a
 	 * tie, it will return null.

@@ -1,4 +1,4 @@
-package com.armend.game.strategies;
+package com.armend.game.rules;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import com.armend.game.components.Item;
 
 /**
- * Defines the standard strategy of deciding who's the winner.
+ * Defines the standard set of rules for deciding who's the winner.
  * <ol>
  * <li>Paper beats Rock</li>
  * <li>Rock beats Scissors</li>
@@ -16,14 +16,14 @@ import com.armend.game.components.Item;
  * @author armend.hoxha
  *
  */
-public class StandardStrategy implements GameStrategy {
+public class StandardDecisionRules implements DecisionRules {
 
 	private final Map<String, Integer> decisionTable;
 	private static final int TIE = 0;
 	private static final int FIRST_WINS = 1;
 	private static final int SECOND_WINS = 2;
 
-	public StandardStrategy() {
+	public StandardDecisionRules() {
 		decisionTable = new HashMap<>();
 		// The key represents the choice of the first player concatenated by the
 		// second's player choice

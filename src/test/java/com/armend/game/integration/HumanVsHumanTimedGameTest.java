@@ -20,7 +20,7 @@ import com.armend.game.components.HumanPlayer;
 import com.armend.game.components.Item;
 import com.armend.game.components.ItemInput;
 import com.armend.game.components.Player;
-import com.armend.game.strategies.StandardStrategy;
+import com.armend.game.rules.StandardDecisionRules;
 
 public class HumanVsHumanTimedGameTest {
 	@Test
@@ -31,7 +31,7 @@ public class HumanVsHumanTimedGameTest {
 		ItemInput player2Input = new ConsoleUserItemInput(new StringReader("P\nS\nS\nR"));
 		Player player2 = new HumanPlayer("Player2", player2Input);
 
-		Arbiter arbiter = new ImpatientArbiter(new StandardStrategy(), player1, player2, 2);
+		Arbiter arbiter = new ImpatientArbiter(new StandardDecisionRules(), player1, player2, 2);
 
 		assertEquals(player1, arbiter.executeRound());
 		assertEquals(player2, arbiter.executeRound());
@@ -52,7 +52,7 @@ public class HumanVsHumanTimedGameTest {
 		ItemInput player2Input = new ConsoleUserItemInput(new StringReader("S\nP\nR\nR"));
 		Player player2 = new HumanPlayer("Player1", player2Input);
 
-		Arbiter arbiter = new ImpatientArbiter(new StandardStrategy(), player1, player2, 1);
+		Arbiter arbiter = new ImpatientArbiter(new StandardDecisionRules(), player1, player2, 1);
 		assertEquals(player2, arbiter.executeRound());
 		assertNull(player1.getPreviousItem());
 		assertEquals(Item.Scissors, player2.getPreviousItem());
@@ -74,7 +74,7 @@ public class HumanVsHumanTimedGameTest {
 				new InputStreamReader(System.in, StandardCharsets.UTF_8.name()));
 		Player player2 = new HumanPlayer("Player2", player2Input);
 
-		Arbiter arbiter = new ImpatientArbiter(new StandardStrategy(), player1, player2, 1);
+		Arbiter arbiter = new ImpatientArbiter(new StandardDecisionRules(), player1, player2, 1);
 		assertEquals(player1, arbiter.executeRound());
 		assertNull(player2.getPreviousItem());
 		assertEquals(Item.Scissors, player1.getPreviousItem());
@@ -97,7 +97,7 @@ public class HumanVsHumanTimedGameTest {
 				new InputStreamReader(System.in, StandardCharsets.UTF_8.name()));
 		Player player2 = new HumanPlayer("Player2", player2Input);
 
-		Arbiter arbiter = new ImpatientArbiter(new StandardStrategy(), player1, player2, 1);
+		Arbiter arbiter = new ImpatientArbiter(new StandardDecisionRules(), player1, player2, 1);
 		assertNull(arbiter.executeRound());
 		assertNull(player2.getPreviousItem());
 		assertNull(player1.getPreviousItem());
@@ -118,7 +118,7 @@ public class HumanVsHumanTimedGameTest {
 		ItemInput player2Input = new ConsoleUserItemInput(new StringReader("P"));
 		Player player2 = new HumanPlayer("Player2", player2Input);
 
-		Arbiter arbiter = new ImpatientArbiter(new StandardStrategy(), player1, player2, 2);
+		Arbiter arbiter = new ImpatientArbiter(new StandardDecisionRules(), player1, player2, 2);
 
 		assertEquals(player2, arbiter.executeRound());
 		assertEquals(0, arbiter.getFirstPlayerTotalScore());
