@@ -39,18 +39,18 @@ public enum Item {
 		}
 		if (s.length() > 1) {
 			for (Item item : Item.values()) {
-				if (item.name().toUpperCase().equals(s.toUpperCase())) {
+				if (item.name().equalsIgnoreCase(s.toUpperCase())) {
 					return item;
 				}
 			}
 		} else {
-			if (s.toUpperCase().equals("P")) {
+			if (s.equalsIgnoreCase("P")) {
 				return Paper;
 			}
-			if (s.toUpperCase().equals("R")) {
+			if (s.equalsIgnoreCase("R")) {
 				return Rock;
 			}
-			if (s.toUpperCase().equals("S")) {
+			if (s.equalsIgnoreCase("S")) {
 				return Scissors;
 			}
 		}
