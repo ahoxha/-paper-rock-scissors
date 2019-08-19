@@ -44,13 +44,13 @@ public enum Item {
 				}
 			}
 		} else {
-			if (s.toUpperCase().equals("P")) {
+			if (s.equalsIgnoreCase("P")) {
 				return Paper;
 			}
-			if (s.toUpperCase().equals("R")) {
+			if (s.equalsIgnoreCase("R")) {
 				return Rock;
 			}
-			if (s.toUpperCase().equals("S")) {
+			if (s.equalsIgnoreCase("S")) {
 				return Scissors;
 			}
 		}
