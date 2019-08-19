@@ -15,7 +15,7 @@ public class ImpatientArbiterTest {
 			new ImpatientArbiter(null, null, null, 1);
 			fail("Should not have reached this point. All consturctor parameters must be non-null.");
 		} catch (NullPointerException e) {
-			assertEquals("NULL value for 'strategy' is not allowed", e.getMessage());
+			assertEquals("NULL value for 'decisionRules' is not allowed", e.getMessage());
 		}
 	}
 

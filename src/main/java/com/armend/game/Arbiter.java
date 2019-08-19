@@ -10,41 +10,41 @@ import com.armend.game.rules.DecisionRules;
 public class Arbiter {
 	protected Player player1;
 	protected Player player2;
-	protected DecisionRules strategy;
+	protected DecisionRules decisionRules;
 	protected ScoreBoard scoreBoard;
 
 	/**
-	 * Create an arbiter with a given game strategy and two players. This arbiter
-	 * will wait indefinitely for the players to play.
+	 * Create an arbiter with the given decision making rules and two players. This
+	 * arbiter will wait indefinitely for the players to play.
 	 * 
-	 * @param strategy Game strategy to decide who's he winner.
-	 * @param player1  First player.
-	 * @param player2  Second player.
+	 * @param decisionRules The set of rules to decide who's he winner.
+	 * @param player1       First player.
+	 * @param player2       Second player.
 	 */
-	public Arbiter(DecisionRules strategy, Player player1, Player player2) {
-		Objects.requireNonNull(strategy, "NULL value for 'strategy' is not allowed");
+	public Arbiter(DecisionRules decisionRules, Player player1, Player player2) {
+		Objects.requireNonNull(decisionRules, "NULL value for 'decisionRules' is not allowed");
 		Objects.requireNonNull(player1, "NULL value for 'player1' is not allowed");
 		Objects.requireNonNull(player2, "NULL value for 'player2' is not allowed");
-		this.strategy = strategy;
+		this.decisionRules = decisionRules;
 		this.player1 = player1;
 		this.player2 = player2;
 		scoreBoard = new ScoreBoard(player1.getName(), player2.getName());
 	}
 
 	/**
-	 * Set the new strategy if 'strategy' is not null. If null argument provided,
-	 * then it's ignored.
+	 * Set the new decision rules if 'decisionRules' is not null. If null argument
+	 * provided, then it's ignored.
 	 * 
-	 * @param strategy The new game strategy to be used by the arbiter.
+	 * @param decisionRules The new game rules to be used by the arbiter.
 	 */
-	public void setStrategy(DecisionRules strategy) {
-		if (strategy != null) {
-			this.strategy = strategy;
+	public void setDecisionRules(DecisionRules decisionRules) {
+		if (decisionRules != null) {
+			this.decisionRules = decisionRules;
 		}
 	}
 
-	public DecisionRules getStrategy() {
-		return this.strategy;
+	public DecisionRules getDecisionRules() {
+		return this.decisionRules;
 	}
 
 	public void printScores(PrintStream stream) {
@@ -64,10 +64,8 @@ public class Arbiter {
 	}
 
 	/**
-	 * Ask the players to make the move and decide who is the winner. If 'async' is
-	 * true, it waits a certain time for a player, if the player fails to play on
-	 * time looses the round. If 'async' is false, it waits for the player
-	 * indefinitely.
+	 * Ask the players to make the move and decide who is the winner. This method
+	 * waits for the player indefinitely.
 	 * 
 	 * @return The winning player, or null if there is a tie between them.
 	 */
@@ -77,14 +75,14 @@ public class Arbiter {
 
 	/**
 	 * Given the selected items from the two players, return the winning player
-	 * based on the game's strategy.
+	 * based on the game rules.
 	 * 
 	 * @param player1Item Item selected by the first player.
 	 * @param player2Item Item selected by the second player.
 	 * @return The winning player or null if there's a tie.
 	 */
 	protected Player getWinner(Item player1Item, Item player2Item) {
-		Item result = strategy.whoIsTheWinner(player1Item, player2Item);
+		Item result = decisionRules.whoIsTheWinner(player1Item, player2Item);
 		if (result == null) {
 			scoreBoard.addRecords(player1Item.name(), player2Item.name(), "It's a tie");
 			scoreBoard.incrementTies();

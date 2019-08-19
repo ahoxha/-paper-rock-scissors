@@ -16,7 +16,7 @@ public class ArbiterTest {
 			new Arbiter(null, null, null);
 			fail("Should not have reached this point. All consturctor parameters must be non-null.");
 		} catch (NullPointerException ne) {
-			assertEquals("NULL value for 'strategy' is not allowed", ne.getMessage());
+			assertEquals("NULL value for 'decisionRules' is not allowed", ne.getMessage());
 		}
 	}
 
@@ -44,8 +44,8 @@ public class ArbiterTest {
 	public void testSetNullStrategy() {
 		Arbiter arbiter = new Arbiter(new StandardDecisionRules(), new ComputerPlayer("Computer1"),
 				new ComputerPlayer("Computer2"));
-		arbiter.setStrategy(null);
-		assertNotNull(arbiter.getStrategy());
+		arbiter.setDecisionRules(null);
+		assertNotNull(arbiter.getDecisionRules());
 	}
 
 	@Test
@@ -53,8 +53,8 @@ public class ArbiterTest {
 		DecisionRules strategy1 = new StandardDecisionRules();
 		DecisionRules strategy2 = new StandardDecisionRules();
 		Arbiter arbiter = new Arbiter(strategy1, new ComputerPlayer("C1"), new ComputerPlayer("C2"));
-		assertEquals(strategy1, arbiter.getStrategy());
-		arbiter.setStrategy(strategy2);
-		assertEquals(strategy2, arbiter.getStrategy());
+		assertEquals(strategy1, arbiter.getDecisionRules());
+		arbiter.setDecisionRules(strategy2);
+		assertEquals(strategy2, arbiter.getDecisionRules());
 	}
 }
