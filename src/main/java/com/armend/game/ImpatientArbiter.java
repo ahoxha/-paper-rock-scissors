@@ -12,8 +12,8 @@ import com.armend.game.rules.DecisionRules;
 
 /**
  * Models an arbiter that doesn't wait forever for the players to play. It waits
- * a certain amount of time, and moves on. The player who failed to play on time
- * looses the round. If both players fail to play on time, the round ends on a
+ * a certain amount of time, and moves on. The player who fails to play on time
+ * loses the round. If both players fail to play on time, the round ends on a
  * tie.
  * 
  * @author armend.hoxha
@@ -25,10 +25,10 @@ public class ImpatientArbiter extends Arbiter {
 	private int secondsToWait;// time in seconds to wait for the player to play.
 
 	/**
-	 * Create an Arbiter with a given game strategy, two players and the max wait
+	 * Create an Arbiter with the given decision rules, two players and the max wait
 	 * time in seconds 'secondsToWait' the arbiter must wait for players to play.
 	 * 
-	 * @param strategy      Game strategy to decide who's the winner.
+	 * @param decisionRules Game rules to decide who's the winner.
 	 * @param player1       First player.
 	 * @param player2       Second player.
 	 * @param secondsToWait Maximum wait time, in seconds, that the arbiter should
@@ -36,8 +36,8 @@ public class ImpatientArbiter extends Arbiter {
 	 *                      greater than or equal to 1, otherwise it will be
 	 *                      ignored, and the default value will be used.
 	 */
-	public ImpatientArbiter(DecisionRules strategy, Player player1, Player player2, int secondsToWait) {
-		super(strategy, player1, player2);
+	public ImpatientArbiter(DecisionRules decisionRules, Player player1, Player player2, int secondsToWait) {
+		super(decisionRules, player1, player2);
 		this.secondsToWait = secondsToWait < 1 ? defaultSecondsToWait : secondsToWait;
 	}
 
@@ -68,7 +68,7 @@ public class ImpatientArbiter extends Arbiter {
 		}
 
 		// if both players have made the move, then decide who's the winner based on the
-		// strategy
+		// rules
 		return getWinner(player1Item, player2Item);
 	}
 
