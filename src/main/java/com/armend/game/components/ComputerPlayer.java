@@ -14,11 +14,8 @@ public class ComputerPlayer extends Player {
 	}
 
 	/**
-	 * Constructs a ComputerPlayer object with the given ItemInput.
-	 * 
-	 * @param name  Name of the player.
-	 * @param input ItemInput from which items will be retrieved while playing the
-	 *              game.
+	 * Constructs a ComputerPlayer object with the given ItemInput, from which items
+	 * will be retrieved while playing the game.
 	 */
 	public ComputerPlayer(String name, ItemInput input) {
 		super(name);
