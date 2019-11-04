@@ -13,7 +13,11 @@ public class ConsoleUserItemInput implements ItemInput {
 
 	@Override
 	public Item get() {
-		Item item = null;
+		return readInputFromConsole();
+	}
+
+	private Item readInputFromConsole() {
+		Item item;
 		int tries = 3;
 		do {
 			System.out.println("Type S for Scissors, R for Rock, P for Paper:");
