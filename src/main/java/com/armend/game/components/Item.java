@@ -1,5 +1,7 @@
 package com.armend.game.components;
 
+import java.util.function.BiFunction;
+
 public enum Item {
 	Rock(0), Paper(1), Scissors(2);
 
@@ -13,40 +15,35 @@ public enum Item {
 		return this.index;
 	}
 
-	/**
-	 * Returns the item that matches with 's' or null if none matches. (case
-	 * insensitive).
-	 * <p>
-	 * If 's' is a single letter, then:
-	 * <ul>
-	 * <li>return Paper if s= {P | p}</li>
-	 * <li>return Rock if s = {R | r}</li>
-	 * <li>return Scissors if s = {S | s}</li>
-	 * <li>return null if none of the above is true</li>
-	 * </ul>
-	 */
 	public static Item of(String input) {
-		if (input == null || input.isEmpty()) {
+		if (isEmptyOrNull(input)) {
 			return null;
 		}
-		if (input.length() == 1) {
-			return findItemByMatchingTheFirstLetter(input);
+		if (isOneLetter(input)) {
+			return findItem(input, compareFirstLetterOnlyIgnoreCase());
 		}
-		return findItemByIteratingOverValues(input);
+		return findItem(input, compareWholeStringIgnoreCase());
 	}
 
-	private static Item findItemByMatchingTheFirstLetter(String input) {
-		for (Item item : Item.values()) {
-			if (item.name().startsWith(input.toUpperCase())) {
-				return item;
-			}
-		}
-		return null;
+	private static boolean isEmptyOrNull(String input) {
+		return input == null || input.isEmpty();
 	}
 
-	private static Item findItemByIteratingOverValues(String input) {
+	private static boolean isOneLetter(String input) {
+		return input.length() == 1;
+	}
+
+	private static BiFunction<String, String, Boolean> compareWholeStringIgnoreCase() {
+		return (s1, s2) -> s1.equalsIgnoreCase(s2);
+	}
+
+	private static BiFunction<String, String, Boolean> compareFirstLetterOnlyIgnoreCase() {
+		return (s1, s2) -> s1.toUpperCase().startsWith(s2.toUpperCase());
+	}
+
+	private static Item findItem(String input, BiFunction<String, String, Boolean> func) {
 		for (Item item : Item.values()) {
-			if (item.name().equalsIgnoreCase(input.toUpperCase())) {
+			if (func.apply(item.name(), input)) {
 				return item;
 			}
 		}
