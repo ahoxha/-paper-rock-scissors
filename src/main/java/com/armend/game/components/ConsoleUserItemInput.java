@@ -1,8 +1,6 @@
 package com.armend.game.components;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 
 public class ConsoleUserItemInput implements ItemInput {
 	private BufferedReader reader;

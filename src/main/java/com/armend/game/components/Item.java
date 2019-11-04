@@ -1,11 +1,5 @@
 package com.armend.game.components;
 
-/**
- * Specifies the items for the Paper - Rock Scissors game.
- * 
- * @author armend.hoxha
- *
- */
 public enum Item {
 	Rock(0), Paper(1), Scissors(2);
 
@@ -20,7 +14,8 @@ public enum Item {
 	}
 
 	/**
-	 * Return the item that 's' matches with (case insensitive).
+	 * Returns the item that matches with 's' or null if none matches. (case
+	 * insensitive).
 	 * <p>
 	 * If 's' is a single letter, then:
 	 * <ul>
@@ -29,29 +24,30 @@ public enum Item {
 	 * <li>return Scissors if s = {S | s}</li>
 	 * <li>return null if none of the above is true</li>
 	 * </ul>
-	 * 
-	 * @param s
-	 * @return The item that matches with 's' or null if none matches.
 	 */
-	public static Item of(String s) {
-		if (s == null || s.isEmpty()) {
+	public static Item of(String input) {
+		if (input == null || input.isEmpty()) {
 			return null;
 		}
-		if (s.length() > 1) {
-			for (Item item : Item.values()) {
-				if (item.name().equalsIgnoreCase(s.toUpperCase())) {
-					return item;
-				}
+		if (input.length() == 1) {
+			return findItemByMatchingTheFirstLetter(input);
+		}
+		return findItemByIteratingOverValues(input);
+	}
+
+	private static Item findItemByMatchingTheFirstLetter(String input) {
+		for (Item item : Item.values()) {
+			if (item.name().startsWith(input.toUpperCase())) {
+				return item;
 			}
-		} else {
-			if (s.equalsIgnoreCase("P")) {
-				return Paper;
-			}
-			if (s.equalsIgnoreCase("R")) {
-				return Rock;
-			}
-			if (s.equalsIgnoreCase("S")) {
-				return Scissors;
+		}
+		return null;
+	}
+
+	private static Item findItemByIteratingOverValues(String input) {
+		for (Item item : Item.values()) {
+			if (item.name().equalsIgnoreCase(input.toUpperCase())) {
+				return item;
 			}
 		}
 		return null;
