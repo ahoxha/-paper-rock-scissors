@@ -13,6 +13,8 @@ public class ScoreBoard {
 	private int firstPlayersTotalScore;
 	private int secondPlayersTotalScore;
 	private int ties;
+	private final int columnWidth = -35;
+	private final String rowFormat = "| %" + columnWidth + "s | %" + columnWidth + "s | %" + columnWidth + "s |";
 
 	public ScoreBoard(String firstPlayer, String secondPlayer) {
 		if (firstPlayer == null || firstPlayer.isEmpty()) {
@@ -28,29 +30,43 @@ public class ScoreBoard {
 
 	public void printTo(PrintStream stream) {
 		Objects.requireNonNull(stream, "Please provide a non-null PrintStream.");
-		int columnWidth = -35;
 		StringBuilder builder = new StringBuilder();
+		createHorizontalTableBorder(columnWidth, builder);
+		printTitle(stream);
+		printHorizontalBorder(stream, builder);
+		printTableHeader(stream);
+		printHorizontalBorder(stream, builder);
+		for (Record record : records) {
+			stream.println(String.format(rowFormat, record.getFirstPlayersChoice(), record.getSecondPlayersChoice(),
+					record.getWinner()));
+		}
+		stream.print(builder.toString());
+		stream.println("\nTotals:");
+		printHorizontalBorder(stream, builder);
+		stream.println(String.format(rowFormat, firstPlayer, secondPlayer, "Ties"));
+		printHorizontalBorder(stream, builder);
+		stream.println(String.format(rowFormat, firstPlayersTotalScore, secondPlayersTotalScore, ties));
+		printHorizontalBorder(stream, builder);
+	}
+
+	private void printTableHeader(PrintStream stream) {
+		stream.println(String.format(rowFormat, firstPlayer, secondPlayer, "Winner"));
+	}
+
+	private void printHorizontalBorder(PrintStream stream, StringBuilder builder) {
+		stream.println(builder.toString());
+	}
+
+	private void printTitle(PrintStream stream) {
+		stream.println("\n================ Score Board =========================");
+	}
+
+	private void createHorizontalTableBorder(int columnWidth, StringBuilder builder) {
 		builder.append("+");
 		for (int i = 0; i < 3 * Math.abs(columnWidth) + 8; i++) {
 			builder.append("-");
 		}
 		builder.append("+");
-		stream.println("\n================ Score Board =========================");
-		stream.println(builder.toString());
-		String format = "| %" + columnWidth + "s | %" + columnWidth + "s | %" + columnWidth + "s |";
-		stream.println(String.format(format, firstPlayer, secondPlayer, "Winner"));
-		stream.println(builder.toString());
-		for (Record record : records) {
-			stream.println(String.format(format, record.getFirstPlayersChoice(), record.getSecondPlayersChoice(),
-					record.getWinner()));
-		}
-		stream.print(builder.toString());
-		stream.println("\nTotals:");
-		stream.println(builder.toString());
-		stream.println(String.format(format, firstPlayer, secondPlayer, "Ties"));
-		stream.println(builder.toString());
-		stream.println(String.format(format, firstPlayersTotalScore, secondPlayersTotalScore, ties));
-		stream.println(builder.toString());
 	}
 
 	public String getLast() {
