@@ -9,8 +9,6 @@ import com.armend.game.components.Item;
  * <li>Rock beats Scissors</li>
  * <li>Scissors beats Paper</li>
  * </ol>
- * 
- * @author armend.hoxha
  *
  */
 public class StandardDecisionRules implements DecisionRules {
@@ -29,13 +27,16 @@ public class StandardDecisionRules implements DecisionRules {
 
 	@Override
 	public Item whoIsTheWinner(Item firstItem, Item secondItem) {
+		validate(firstItem, secondItem);
+		return decisionTable[firstItem.getIndex()][secondItem.getIndex()];
+	}
+
+	private void validate(Item firstItem, Item secondItem) {
 		if (firstItem == null) {
 			throw new IllegalArgumentException("firstItem should not be null");
 		}
 		if (secondItem == null) {
 			throw new IllegalArgumentException("secondItem should not be null");
 		}
-
-		return decisionTable[firstItem.getIndex()][secondItem.getIndex()];
 	}
 }
