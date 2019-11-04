@@ -36,10 +36,7 @@ public class ScoreBoard {
 		printHorizontalBorder(stream, builder);
 		printTableHeader(stream);
 		printHorizontalBorder(stream, builder);
-		for (Record record : records) {
-			stream.println(String.format(rowFormat, record.getFirstPlayersChoice(), record.getSecondPlayersChoice(),
-					record.getWinner()));
-		}
+		printAllRecords(stream);
 		stream.print(builder.toString());
 		stream.println("\nTotals:");
 		printHorizontalBorder(stream, builder);
@@ -47,6 +44,13 @@ public class ScoreBoard {
 		printHorizontalBorder(stream, builder);
 		stream.println(String.format(rowFormat, firstPlayersTotalScore, secondPlayersTotalScore, ties));
 		printHorizontalBorder(stream, builder);
+	}
+
+	private void printAllRecords(PrintStream stream) {
+		for (Record record : records) {
+			stream.println(String.format(rowFormat, record.getFirstPlayersChoice(), record.getSecondPlayersChoice(),
+					record.getWinner()));
+		}
 	}
 
 	private void printTableHeader(PrintStream stream) {
