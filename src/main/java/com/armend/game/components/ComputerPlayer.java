@@ -8,8 +8,6 @@ public class ComputerPlayer extends Player {
 
 	/**
 	 * Constructs a ComputerPlayer object with a RandomItemInput.
-	 * 
-	 * @param name Name of the player.
 	 */
 	public ComputerPlayer(String name) {
 		this(name, new RandomItemInput());

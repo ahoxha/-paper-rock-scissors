@@ -1,12 +1,5 @@
 package com.armend.game.components;
 
-/**
- * Models an abstract player of the Paper-Rock-Scissors game. Concrete
- * subclasses of this class have to implement the 'play()' method.
- * 
- * @author armend.hoxha
- *
- */
 public abstract class Player {
 	private String name;
 	protected Item previousItem;
@@ -23,18 +16,11 @@ public abstract class Player {
 	}
 
 	/**
-	 * Get the item that was chosen previously or null if there is none.
-	 * 
-	 * @return {@link Item} or null.
+	 * Get the item that was previously chosen or null if there is none.
 	 */
 	public Item getPreviousItem() {
 		return previousItem;
 	}
 
-	/**
-	 * Make the move.
-	 * 
-	 * @return An Item object that you want choose for a given round.
-	 */
 	public abstract Item play();
 }
