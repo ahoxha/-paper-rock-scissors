@@ -13,8 +13,9 @@ public class ScoreBoard {
 	private int firstPlayersTotalScore;
 	private int secondPlayersTotalScore;
 	private int ties;
-	private final int columnWidth = -35;
-	private final String rowFormat = "| %" + columnWidth + "s | %" + columnWidth + "s | %" + columnWidth + "s |";
+	private static final int columnWidth = -35;
+	private static final String rowFormat = "| %" + columnWidth + "s | %" + columnWidth + "s | %" + columnWidth + "s |";
+	private String horizontalTableBorder;
 
 	public ScoreBoard(String firstPlayer, String secondPlayer) {
 		if (firstPlayer == null || firstPlayer.isEmpty()) {
@@ -26,24 +27,50 @@ public class ScoreBoard {
 		this.firstPlayer = firstPlayer;
 		this.secondPlayer = secondPlayer;
 		records = new ArrayList<>();
+		this.horizontalTableBorder = createHorizontalTableBorder(columnWidth);
+	}
+	
+	private String createHorizontalTableBorder(int columnWidth) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("+");
+		for (int i = 0; i < 3 * Math.abs(columnWidth) + 8; i++) {
+			builder.append("-");
+		}
+		builder.append("+");
+		return builder.toString();
 	}
 
 	public void printTo(PrintStream stream) {
 		Objects.requireNonNull(stream, "Please provide a non-null PrintStream.");
-		StringBuilder builder = new StringBuilder();
-		createHorizontalTableBorder(columnWidth, builder);
-		printTitle(stream);
-		printHorizontalBorder(stream, builder);
+
+		printScoreBoard(stream);
+		printTotals(stream);
+	}
+	
+	private void printScoreBoard(PrintStream stream) {
+		printTitle(stream, "Score Board:");
+		printHorizontalBorder(stream);
 		printTableHeader(stream);
-		printHorizontalBorder(stream, builder);
+		printHorizontalBorder(stream);
 		printAllRecords(stream);
-		stream.print(builder.toString());
-		stream.println("\nTotals:");
-		printHorizontalBorder(stream, builder);
-		stream.println(String.format(rowFormat, firstPlayer, secondPlayer, "Ties"));
-		printHorizontalBorder(stream, builder);
+		printHorizontalBorder(stream);
+	}
+
+	private void printTotals(PrintStream stream) {
+		printTitle(stream, "Totals:");
+		printHorizontalBorder(stream);
+		printTotalsHeader(stream);
+		printHorizontalBorder(stream);
+		printTotalsRow(stream);
+		printHorizontalBorder(stream);
+	}
+
+	private void printTotalsRow(PrintStream stream) {
 		stream.println(String.format(rowFormat, firstPlayersTotalScore, secondPlayersTotalScore, ties));
-		printHorizontalBorder(stream, builder);
+	}
+
+	private void printTotalsHeader(PrintStream stream) {
+		stream.println(String.format(rowFormat, firstPlayer, secondPlayer, "Ties"));
 	}
 
 	private void printAllRecords(PrintStream stream) {
@@ -57,20 +84,12 @@ public class ScoreBoard {
 		stream.println(String.format(rowFormat, firstPlayer, secondPlayer, "Winner"));
 	}
 
-	private void printHorizontalBorder(PrintStream stream, StringBuilder builder) {
-		stream.println(builder.toString());
+	private void printHorizontalBorder(PrintStream stream) {
+		stream.println(horizontalTableBorder);
 	}
 
-	private void printTitle(PrintStream stream) {
-		stream.println("\n================ Score Board =========================");
-	}
-
-	private void createHorizontalTableBorder(int columnWidth, StringBuilder builder) {
-		builder.append("+");
-		for (int i = 0; i < 3 * Math.abs(columnWidth) + 8; i++) {
-			builder.append("-");
-		}
-		builder.append("+");
+	private void printTitle(PrintStream stream, String title) {
+		stream.println("\n" + title);
 	}
 
 	public String getLast() {
