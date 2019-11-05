@@ -97,9 +97,10 @@ public final class ComputerVsHumanConsoleGame {
 			}
 			System.out.println(arbiter.getLastResult());
 		}
+		finalizeGame();
 	}
 
-	public void end() {
+	private void finalizeGame() {
 		arbiter.printScores(System.out);
 		scanner.close();
 	}
