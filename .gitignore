@@ -5,3 +5,6 @@ bin/
 .classpath
 .project
 .gradle
+*.iml
+*.ipr
+*.iws

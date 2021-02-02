@@ -1,6 +1,6 @@
 # The Paper-Rock-Scissors game
 
-This program is developed in eclise using gradle. It is shipped with **gradle wrapper**, so you don't have to have **gradle** installed to be able to build the project. All you have to do is use `gradlew` (or `./gradlew`) instead of `gradle` when you run **gradle** commands.
+It is shipped with **gradle wrapper**, so you don't have to have **gradle** installed to be able to build the project. All you have to do is use `gradlew` (or `./gradlew`) instead of `gradle` when you run **gradle** commands.
 
 ## How to build the project?
 
@@ -29,9 +29,12 @@ I've used the `jacoco` gradle plugin to run the code coverage analysis.
 CD into the project's folder, then type `gradlew build jacocoTestReport`. 
 You can see the **code coverage results** in the `{project_folder}/build/jacocoHtml/index.html` file.
 
-## How to make it an eclipse project and continue working on it?
+## How to make it an Eclipse/IntelliJ project and continue working on it?
 
 CD into the project directory and type:
-`gradlew eclise`
+
+`gradlew eclise` - for Eclipse
+
+`gradlew idea` - for IntelliJ IDEA
 
 Then you can import it into your Eclipse IDE.
