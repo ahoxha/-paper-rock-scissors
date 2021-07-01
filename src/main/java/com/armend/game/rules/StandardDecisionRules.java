@@ -19,9 +19,9 @@ public class StandardDecisionRules implements DecisionRules {
 		decisionTable = new Item[][]
 		{ 			/*SECOND:rock	 			paper			scissors*/
 		/*FIRST*/
-		/*rock*/		{	 null,			Item.Paper,			Item.Rock	},
-		/*paper*/		{	 Item.Paper,	null,		 		Item.Scissors	},
-		/*scissors*/	{	 Item.Rock,		Item.Scissors,		null			}
+		/*rock*/		{ null, 			Item.PAPER, 		Item.ROCK 		},
+		/*paper*/		{ Item.PAPER, 		null, 				Item.SCISSORS 	},
+		/*scissors*/	{ Item.ROCK, 		Item.SCISSORS, 		null			}
 		};
 	}
 

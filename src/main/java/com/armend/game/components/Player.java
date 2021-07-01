@@ -1,10 +1,10 @@
 package com.armend.game.components;
 
 public abstract class Player {
-	private String name;
+	private final String name;
 	protected Item previousItem;
 
-	public Player(String name) {
+	Player(String name) {
 		if (name == null || name.isEmpty()) {
 			throw new IllegalArgumentException("The 'name' argument must be non-null and non-empty.");
 		}

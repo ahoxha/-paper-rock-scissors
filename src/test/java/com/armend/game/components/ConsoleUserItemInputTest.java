@@ -12,9 +12,9 @@ class ConsoleUserItemInputTest {
 	void testGetItemUpperCase() {
 		Reader reader = new StringReader("R\nS\nP");
 		ConsoleUserItemInput input = new ConsoleUserItemInput(reader);
-		assertEquals(Item.Rock, input.get());
-		assertEquals(Item.Scissors, input.get());
-		assertEquals(Item.Paper, input.get());
+		assertEquals(Item.ROCK, input.get());
+		assertEquals(Item.SCISSORS, input.get());
+		assertEquals(Item.PAPER, input.get());
 	}
 
 	@Test
@@ -28,35 +28,35 @@ class ConsoleUserItemInputTest {
 	void testGetItemLowerCase() {
 		Reader reader = new StringReader("r\ns\np");
 		ConsoleUserItemInput input = new ConsoleUserItemInput(reader);
-		assertEquals(Item.Rock, input.get());
-		assertEquals(Item.Scissors, input.get());
-		assertEquals(Item.Paper, input.get());
+		assertEquals(Item.ROCK, input.get());
+		assertEquals(Item.SCISSORS, input.get());
+		assertEquals(Item.PAPER, input.get());
 	}
 
 	@Test
 	void testGetItemWithFullItemNames() {
 		Reader reader = new StringReader("Rock\nScissors\nPaper");
 		ConsoleUserItemInput input = new ConsoleUserItemInput(reader);
-		assertEquals(Item.Rock, input.get());
-		assertEquals(Item.Scissors, input.get());
-		assertEquals(Item.Paper, input.get());
+		assertEquals(Item.ROCK, input.get());
+		assertEquals(Item.SCISSORS, input.get());
+		assertEquals(Item.PAPER, input.get());
 	}
 
 	@Test
 	void testGetItemWithFullItemNamesUpperCase() {
 		Reader reader = new StringReader("ROCK\nSCISSORS\nPAPER");
 		ConsoleUserItemInput input = new ConsoleUserItemInput(reader);
-		assertEquals(Item.Rock, input.get());
-		assertEquals(Item.Scissors, input.get());
-		assertEquals(Item.Paper, input.get());
+		assertEquals(Item.ROCK, input.get());
+		assertEquals(Item.SCISSORS, input.get());
+		assertEquals(Item.PAPER, input.get());
 	}
 
 	@Test
 	void testGetItemWithFullItemNamesLowerCase() {
 		Reader reader = new StringReader("rock\nscissors\npaper");
 		ConsoleUserItemInput input = new ConsoleUserItemInput(reader);
-		assertEquals(Item.Rock, input.get());
-		assertEquals(Item.Scissors, input.get());
-		assertEquals(Item.Paper, input.get());
+		assertEquals(Item.ROCK, input.get());
+		assertEquals(Item.SCISSORS, input.get());
+		assertEquals(Item.PAPER, input.get());
 	}
 }

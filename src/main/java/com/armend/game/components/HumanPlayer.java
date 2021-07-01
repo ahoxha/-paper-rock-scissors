@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class HumanPlayer extends Player {
 
-	private ItemInput input;
+	private final ItemInput input;
 
 	public HumanPlayer(String name, ItemInput input) {
 		super(name);

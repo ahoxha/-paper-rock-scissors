@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class ComputerPlayer extends Player {
 
-	private ItemInput input;
+	private final ItemInput input;
 
 	/**
 	 * Constructs a ComputerPlayer object with a RandomItemInput.

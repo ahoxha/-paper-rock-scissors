@@ -7,8 +7,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.armend.game.components.Item;
-import com.armend.game.rules.DecisionRules;
-import com.armend.game.rules.StandardDecisionRules;
 
 class StandardDecisionRulesTest {
 
@@ -21,53 +19,53 @@ class StandardDecisionRulesTest {
 
 	@Test
 	void testRockPaper() {
-		assertEquals(Item.Paper, strategy.whoIsTheWinner(Item.Rock, Item.Paper));
+		assertEquals(Item.PAPER, strategy.whoIsTheWinner(Item.ROCK, Item.PAPER));
 	}
 
 	@Test
 	void testPaperRock() {
-		assertEquals(Item.Paper, strategy.whoIsTheWinner(Item.Paper, Item.Rock));
+		assertEquals(Item.PAPER, strategy.whoIsTheWinner(Item.PAPER, Item.ROCK));
 	}
 
 	@Test
 	void testRockScissors() {
-		assertEquals(Item.Rock, strategy.whoIsTheWinner(Item.Rock, Item.Scissors));
+		assertEquals(Item.ROCK, strategy.whoIsTheWinner(Item.ROCK, Item.SCISSORS));
 	}
 
 	@Test
 	void testScissorsRock() {
-		assertEquals(Item.Rock, strategy.whoIsTheWinner(Item.Scissors, Item.Rock));
+		assertEquals(Item.ROCK, strategy.whoIsTheWinner(Item.SCISSORS, Item.ROCK));
 	}
 
 	@Test
 	void testScissorsPaper() {
-		assertEquals(Item.Scissors, strategy.whoIsTheWinner(Item.Scissors, Item.Paper));
+		assertEquals(Item.SCISSORS, strategy.whoIsTheWinner(Item.SCISSORS, Item.PAPER));
 	}
 
 	@Test
 	void testPaperScissors() {
-		assertEquals(Item.Scissors, strategy.whoIsTheWinner(Item.Paper, Item.Scissors));
+		assertEquals(Item.SCISSORS, strategy.whoIsTheWinner(Item.PAPER, Item.SCISSORS));
 	}
 
 	@Test
 	void testPaperPaper() {
-		assertNull(strategy.whoIsTheWinner(Item.Paper, Item.Paper));
+		assertNull(strategy.whoIsTheWinner(Item.PAPER, Item.PAPER));
 	}
 
 	@Test
 	void testRockRock() {
-		assertNull(strategy.whoIsTheWinner(Item.Rock, Item.Rock));
+		assertNull(strategy.whoIsTheWinner(Item.ROCK, Item.ROCK));
 	}
 
 	@Test
 	void testScissorsScissors() {
-		assertNull(strategy.whoIsTheWinner(Item.Scissors, Item.Scissors));
+		assertNull(strategy.whoIsTheWinner(Item.SCISSORS, Item.SCISSORS));
 	}
 
 	@Test
 	void testWithFirstNullItem() {
 		try {
-			strategy.whoIsTheWinner(null, Item.Paper);
+			strategy.whoIsTheWinner(null, Item.PAPER);
 			fail("Should have thrown an IllegalArgumentException");
 		} catch (IllegalArgumentException e) {
 			assertEquals("firstItem should not be null", e.getMessage());
@@ -77,7 +75,7 @@ class StandardDecisionRulesTest {
 	@Test
 	void testWithSecondNullItem() {
 		try {
-			strategy.whoIsTheWinner(Item.Rock, null);
+			strategy.whoIsTheWinner(Item.ROCK, null);
 			fail("Should have thrown an IllegalArgumentException");
 		} catch (IllegalArgumentException e) {
 			assertEquals("secondItem should not be null", e.getMessage());

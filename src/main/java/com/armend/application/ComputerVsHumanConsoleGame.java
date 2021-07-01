@@ -16,12 +16,12 @@ import com.armend.game.rules.DecisionRules;
 import com.armend.game.rules.StandardDecisionRules;
 
 public final class ComputerVsHumanConsoleGame {
-	private Player player1;
-	private Player player2;
-	private Arbiter arbiter;
-	private int rounds;
-	private final static int MIN_ROUNDS = 3;
-	private final static int MAX_ROUNDS = 100;
+	private final Player player1;
+	private final Player player2;
+	private final Arbiter arbiter;
+	private final int rounds;
+	private static final int MIN_ROUNDS = 3;
+	private static final int MAX_ROUNDS = 100;
 	private static Scanner scanner;
 
 	private ComputerVsHumanConsoleGame(Player player1, Player player2, int rounds, Arbiter arbiter) {
@@ -53,7 +53,7 @@ public final class ComputerVsHumanConsoleGame {
 		System.out.println("Type U for an untimed game (the program will wait indefitely for the user's input.)");
 		System.out.println("If you don't give the right input (either T or U), the program will start a timed game.");
 		try {
-			return !"U".equals(scanner.nextLine().toUpperCase());
+			return !"U".equalsIgnoreCase(scanner.nextLine());
 		} catch (NoSuchElementException | IllegalStateException e) {
 			return true;
 		}
@@ -64,7 +64,7 @@ public final class ComputerVsHumanConsoleGame {
 		do {
 			String input = scanner.nextLine();
 			try {
-				int num = Integer.parseInt(input);
+				var num = Integer.parseInt(input);
 				validateRounds(num);
 				return num;
 			} catch (NumberFormatException e) {

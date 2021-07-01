@@ -55,7 +55,7 @@ class HumanVsHumanTimedGameTest {
 		Arbiter arbiter = new ImpatientArbiter(new StandardDecisionRules(), player1, player2, 1);
 		assertEquals(player2, arbiter.executeRound());
 		assertNull(player1.getPreviousItem());
-		assertEquals(Item.Scissors, player2.getPreviousItem());
+		assertEquals(Item.SCISSORS, player2.getPreviousItem());
 		assertEquals(0, arbiter.getFirstPlayerTotalScore());
 		assertEquals(1, arbiter.getSecondPlayerTotalScore());
 		assertEquals(0, arbiter.getTies());
@@ -77,7 +77,7 @@ class HumanVsHumanTimedGameTest {
 		Arbiter arbiter = new ImpatientArbiter(new StandardDecisionRules(), player1, player2, 1);
 		assertEquals(player1, arbiter.executeRound());
 		assertNull(player2.getPreviousItem());
-		assertEquals(Item.Scissors, player1.getPreviousItem());
+		assertEquals(Item.SCISSORS, player1.getPreviousItem());
 		assertEquals(1, arbiter.getFirstPlayerTotalScore());
 		assertEquals(0, arbiter.getSecondPlayerTotalScore());
 		assertEquals(0, arbiter.getTies());

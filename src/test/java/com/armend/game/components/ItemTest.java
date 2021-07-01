@@ -32,8 +32,8 @@ class ItemTest {
 
 	@Test
 	void ensureIndices() {
-		assertEquals(0, Item.Rock.getIndex(), Item.Rock + " must have index = 0");
-		assertEquals(1, Item.Paper.getIndex(), Item.Paper + " must have index = 1");
-		assertEquals(2, Item.Scissors.getIndex(), Item.Scissors + " must have index = 2");
+		assertEquals(0, Item.ROCK.getIndex(), Item.ROCK + " must have index = 0");
+		assertEquals(1, Item.PAPER.getIndex(), Item.PAPER + " must have index = 1");
+		assertEquals(2, Item.SCISSORS.getIndex(), Item.SCISSORS + " must have index = 2");
 	}
 }

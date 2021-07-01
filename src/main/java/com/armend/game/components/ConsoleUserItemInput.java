@@ -3,7 +3,7 @@ package com.armend.game.components;
 import java.io.*;
 
 public class ConsoleUserItemInput implements ItemInput {
-	private BufferedReader reader;
+	private final BufferedReader reader;
 
 	public ConsoleUserItemInput(Reader reader) {
 		this.reader = new BufferedReader(reader);
@@ -16,7 +16,7 @@ public class ConsoleUserItemInput implements ItemInput {
 
 	private Item readInputFromConsole() {
 		Item item;
-		int tries = 3;
+		var tries = 3;
 		do {
 			String input = askUserForInput();
 			item = Item.of(input);
@@ -26,7 +26,7 @@ public class ConsoleUserItemInput implements ItemInput {
 			tries--;
 		} while (isWrongInput(item) && tries > 0);
 		if (isWrongInput(item)) {
-			System.out.print(String.format("Failed to get a valid input after %s consequetive tries.", tries));
+			System.out.printf("Failed to get a valid input after %s consequetive tries.", tries);
 		}
 		return item;
 	}

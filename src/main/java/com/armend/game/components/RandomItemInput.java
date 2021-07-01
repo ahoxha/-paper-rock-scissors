@@ -4,8 +4,8 @@ import java.security.SecureRandom;
 
 public class RandomItemInput implements ItemInput {
 
-	private SecureRandom random;
-	private Item[] components;
+	private final SecureRandom random;
+	private final Item[] components;
 
 	public RandomItemInput() {
 		random = new SecureRandom();

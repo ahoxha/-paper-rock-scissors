@@ -7,157 +7,149 @@ import java.util.Objects;
 
 public class ScoreBoard {
 
-	private List<Record> records;
-	private String firstPlayer;
-	private String secondPlayer;
-	private int firstPlayersTotalScore;
-	private int secondPlayersTotalScore;
-	private int ties;
-	private static final int columnWidth = -35;
-	private static final String rowFormat = "| %" + columnWidth + "s | %" + columnWidth + "s | %" + columnWidth + "s |";
-	private String horizontalTableBorder;
+    private final List<Record> records;
+    private final String firstPlayer;
+    private final String secondPlayer;
+    private int firstPlayersTotalScore;
+    private int secondPlayersTotalScore;
+    private int ties;
+    private static final int COLUMN_WIDTH = -35;
+    private static final String ROW_FORMAT = "| %" + COLUMN_WIDTH + "s | %" + COLUMN_WIDTH + "s | %" + COLUMN_WIDTH + "s |";
+    private final String horizontalTableBorder;
 
-	public ScoreBoard(String firstPlayer, String secondPlayer) {
-		if (firstPlayer == null || firstPlayer.isEmpty()) {
-			throw new IllegalArgumentException("The 'firstPlayer' argument must be non-null and non-empty.");
-		}
-		if (secondPlayer == null || secondPlayer.isEmpty()) {
-			throw new IllegalArgumentException("The 'secondPlayer' argument must be non-null and non-empty.");
-		}
-		this.firstPlayer = firstPlayer;
-		this.secondPlayer = secondPlayer;
-		records = new ArrayList<>();
-		this.horizontalTableBorder = createHorizontalTableBorder(columnWidth);
-	}
-	
-	private String createHorizontalTableBorder(int columnWidth) {
-		StringBuilder builder = new StringBuilder();
-		builder.append("+");
-		for (int i = 0; i < 3 * Math.abs(columnWidth) + 8; i++) {
-			builder.append("-");
-		}
-		builder.append("+");
-		return builder.toString();
-	}
+    public ScoreBoard(String firstPlayer, String secondPlayer) {
+        if (firstPlayer == null || firstPlayer.isEmpty()) {
+            throw new IllegalArgumentException("The 'firstPlayer' argument must be non-null and non-empty.");
+        }
+        if (secondPlayer == null || secondPlayer.isEmpty()) {
+            throw new IllegalArgumentException("The 'secondPlayer' argument must be non-null and non-empty.");
+        }
+        this.firstPlayer = firstPlayer;
+        this.secondPlayer = secondPlayer;
+        records = new ArrayList<>();
+        this.horizontalTableBorder = createHorizontalTableBorder();
+    }
 
-	public void printTo(PrintStream stream) {
-		Objects.requireNonNull(stream, "Please provide a non-null PrintStream.");
+    public void printTo(PrintStream stream) {
+        Objects.requireNonNull(stream, "Please provide a non-null PrintStream.");
 
-		printScoreBoard(stream);
-		printTotals(stream);
-	}
-	
-	private void printScoreBoard(PrintStream stream) {
-		printTitle(stream, "Score Board:");
-		printHorizontalBorder(stream);
-		printTableHeader(stream);
-		printHorizontalBorder(stream);
-		printAllRecords(stream);
-		printHorizontalBorder(stream);
-	}
+        printScoreBoard(stream);
+        printTotals(stream);
+    }
 
-	private void printTotals(PrintStream stream) {
-		printTitle(stream, "Totals:");
-		printHorizontalBorder(stream);
-		printTotalsHeader(stream);
-		printHorizontalBorder(stream);
-		printTotalsRow(stream);
-		printHorizontalBorder(stream);
-	}
+    public String getLast() {
+        if (records.isEmpty()) {
+            return "";
+        }
+        var singleRecord = records.get(records.size() - 1);
+        return String.format(" [%s: %s; %s: %s]", firstPlayer, singleRecord.getFirstPlayersChoice(), secondPlayer, singleRecord.getSecondPlayersChoice());
+    }
 
-	private void printTotalsRow(PrintStream stream) {
-		stream.println(String.format(rowFormat, firstPlayersTotalScore, secondPlayersTotalScore, ties));
-	}
+    public void addRecords(String firstPlayersChoise, String secondPlayersChoice, String winner) {
+        records.add(new Record(firstPlayersChoise, secondPlayersChoice, winner));
+    }
 
-	private void printTotalsHeader(PrintStream stream) {
-		stream.println(String.format(rowFormat, firstPlayer, secondPlayer, "Ties"));
-	}
+    public void incrementFirstPlayesScore() {
+        firstPlayersTotalScore++;
+    }
 
-	private void printAllRecords(PrintStream stream) {
-		for (Record record : records) {
-			stream.println(String.format(rowFormat, record.getFirstPlayersChoice(), record.getSecondPlayersChoice(),
-					record.getWinner()));
-		}
-	}
+    public void incrementSecondPlayersScore() {
+        secondPlayersTotalScore++;
+    }
 
-	private void printTableHeader(PrintStream stream) {
-		stream.println(String.format(rowFormat, firstPlayer, secondPlayer, "Winner"));
-	}
+    public void incrementTies() {
+        ties++;
+    }
 
-	private void printHorizontalBorder(PrintStream stream) {
-		stream.println(horizontalTableBorder);
-	}
+    public int getFirstPlayersTotalScore() {
+        return firstPlayersTotalScore;
+    }
 
-	private void printTitle(PrintStream stream, String title) {
-		stream.println("\n" + title);
-	}
+    public int getSecondPlayersTotalScore() {
+        return secondPlayersTotalScore;
+    }
 
-	public String getLast() {
-		if (records.isEmpty()) {
-			return "";
-		}
-		Record r = records.get(records.size() - 1);
-		return String.format(" [%s: %s; %s: %s]", firstPlayer, r.getFirstPlayersChoice(), secondPlayer,
-				r.getSecondPlayersChoice());
-	}
+    public int getTies() {
+        return ties;
+    }
 
-	public void addRecords(String firstPlayersChoise, String secondPlayersChoice, String winner) {
-		records.add(new Record(firstPlayersChoise, secondPlayersChoice, winner));
-	}
+    public String getFirstPlayer() {
+        return firstPlayer;
+    }
 
-	public void incrementFirstPlayesScore() {
-		firstPlayersTotalScore++;
-	}
+    public String getSecondPlayer() {
+        return secondPlayer;
+    }
 
-	public void incrementSecondPlayersScore() {
-		secondPlayersTotalScore++;
-	}
+    private String createHorizontalTableBorder() {
+        return "+" + "-".repeat(3 * Math.abs(ScoreBoard.COLUMN_WIDTH) + 8) + "+";
+    }
 
-	public void incrementTies() {
-		ties++;
-	}
+    private void printTableHeader(PrintStream stream) {
+        stream.printf((ROW_FORMAT) + "%n", firstPlayer, secondPlayer, "Winner");
+    }
 
-	public int getFirstPlayersTotalScore() {
-		return firstPlayersTotalScore;
-	}
+    private void printHorizontalBorder(PrintStream stream) {
+        stream.println(horizontalTableBorder);
+    }
 
-	public int getSecondPlayersTotalScore() {
-		return secondPlayersTotalScore;
-	}
+    private void printTitle(PrintStream stream, String title) {
+        stream.println("\n" + title);
+    }
 
-	public int getTies() {
-		return ties;
-	}
+    private void printScoreBoard(PrintStream stream) {
+        printTitle(stream, "Score Board:");
+        printHorizontalBorder(stream);
+        printTableHeader(stream);
+        printHorizontalBorder(stream);
+        printAllRecords(stream);
+        printHorizontalBorder(stream);
+    }
 
-	public String getFirstPlayer() {
-		return firstPlayer;
-	}
+    private void printTotals(PrintStream stream) {
+        printTitle(stream, "Totals:");
+        printHorizontalBorder(stream);
+        printTotalsHeader(stream);
+        printHorizontalBorder(stream);
+        printTotalsRow(stream);
+        printHorizontalBorder(stream);
+    }
 
-	public String getSecondPlayer() {
-		return secondPlayer;
-	}
+    private void printTotalsRow(PrintStream stream) {
+        stream.printf((ROW_FORMAT) + "%n", firstPlayersTotalScore, secondPlayersTotalScore, ties);
+    }
 
-	private static class Record {
-		private String firstPlayersChoice;
-		private String secondPlayersChoice;
-		private String winner;
+    private void printTotalsHeader(PrintStream stream) {
+        stream.printf((ROW_FORMAT) + "%n", firstPlayer, secondPlayer, "Ties");
+    }
 
-		Record(String first, String second, String winner) {
-			this.firstPlayersChoice = first;
-			this.secondPlayersChoice = second;
-			this.winner = winner;
-		}
+    private void printAllRecords(PrintStream stream) {
+        for (var singleRecord : records) {
+            stream.printf((ROW_FORMAT) + "%n", singleRecord.getFirstPlayersChoice(), singleRecord.getSecondPlayersChoice(), singleRecord.getWinner());
+        }
+    }
 
-		public String getFirstPlayersChoice() {
-			return firstPlayersChoice;
-		}
+    private static class Record {
+        private final String firstPlayersChoice;
+        private final String secondPlayersChoice;
+        private final String winner;
 
-		public String getSecondPlayersChoice() {
-			return secondPlayersChoice;
-		}
+        Record(String first, String second, String winner) {
+            this.firstPlayersChoice = first;
+            this.secondPlayersChoice = second;
+            this.winner = winner;
+        }
 
-		public String getWinner() {
-			return winner;
-		}
-	}
+        public String getFirstPlayersChoice() {
+            return firstPlayersChoice;
+        }
+
+        public String getSecondPlayersChoice() {
+            return secondPlayersChoice;
+        }
+
+        public String getWinner() {
+            return winner;
+        }
+    }
 }
