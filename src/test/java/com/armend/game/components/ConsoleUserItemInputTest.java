@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Test;
 
-public class ConsoleUserItemInputTest {
+class ConsoleUserItemInputTest {
 	@Test
-	public void testGetItemUpperCase() {
+	void testGetItemUpperCase() {
 		Reader reader = new StringReader("R\nS\nP");
 		ConsoleUserItemInput input = new ConsoleUserItemInput(reader);
 		assertEquals(Item.Rock, input.get());
@@ -18,14 +18,14 @@ public class ConsoleUserItemInputTest {
 	}
 
 	@Test
-	public void testGetItemMakeSureItEndsOnMultibleWrongInputs() {
+	void testGetItemMakeSureItEndsOnMultibleWrongInputs() {
 		Reader reader = new StringReader("A");
 		ConsoleUserItemInput input = new ConsoleUserItemInput(reader);
 		assertNull(input.get());
 	}
 
 	@Test
-	public void testGetItemLowerCase() {
+	void testGetItemLowerCase() {
 		Reader reader = new StringReader("r\ns\np");
 		ConsoleUserItemInput input = new ConsoleUserItemInput(reader);
 		assertEquals(Item.Rock, input.get());
@@ -34,7 +34,7 @@ public class ConsoleUserItemInputTest {
 	}
 
 	@Test
-	public void testGetItemWithFullItemNames() {
+	void testGetItemWithFullItemNames() {
 		Reader reader = new StringReader("Rock\nScissors\nPaper");
 		ConsoleUserItemInput input = new ConsoleUserItemInput(reader);
 		assertEquals(Item.Rock, input.get());
@@ -43,7 +43,7 @@ public class ConsoleUserItemInputTest {
 	}
 
 	@Test
-	public void testGetItemWithFullItemNamesUpperCase() {
+	void testGetItemWithFullItemNamesUpperCase() {
 		Reader reader = new StringReader("ROCK\nSCISSORS\nPAPER");
 		ConsoleUserItemInput input = new ConsoleUserItemInput(reader);
 		assertEquals(Item.Rock, input.get());
@@ -52,7 +52,7 @@ public class ConsoleUserItemInputTest {
 	}
 
 	@Test
-	public void testGetItemWithFullItemNamesLowerCase() {
+	void testGetItemWithFullItemNamesLowerCase() {
 		Reader reader = new StringReader("rock\nscissors\npaper");
 		ConsoleUserItemInput input = new ConsoleUserItemInput(reader);
 		assertEquals(Item.Rock, input.get());

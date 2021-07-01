@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ComputerPlayerTest {
+class ComputerPlayerTest {
 
 	@Test
-	public void testNewComputerPlayerWithNullName() {
+	void testNewComputerPlayerWithNullName() {
 		try {
 			new ComputerPlayer(null, null);
 			fail("Should not have reached this point.");
@@ -18,7 +18,7 @@ public class ComputerPlayerTest {
 	}
 
 	@Test
-	public void testNewComputerPlayerWithNullInput() {
+	void testNewComputerPlayerWithNullInput() {
 		try {
 			new ComputerPlayer("Computer", null);
 			fail("Should not have reached this point");

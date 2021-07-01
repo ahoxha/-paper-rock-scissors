@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 import com.armend.game.components.ComputerPlayer;
 import com.armend.game.rules.StandardDecisionRules;
 
-public class ImpatientArbiterTest {
+class ImpatientArbiterTest {
 	@Test
-	public void testNewImpatientArbiterWithNullStrategy() {
+	void testNewImpatientArbiterWithNullStrategy() {
 		try {
 			new ImpatientArbiter(null, null, null, 1);
 			fail("Should not have reached this point. All consturctor parameters must be non-null.");
@@ -20,7 +20,7 @@ public class ImpatientArbiterTest {
 	}
 
 	@Test
-	public void testNewImpatientArbiterWithNullFirstPlayer() {
+	void testNewImpatientArbiterWithNullFirstPlayer() {
 		try {
 			new ImpatientArbiter(new StandardDecisionRules(), null, null, 1);
 			fail("Should not have reached this point. All consturctor parameters must be non-null.");
@@ -30,7 +30,7 @@ public class ImpatientArbiterTest {
 	}
 
 	@Test
-	public void testNewImpatientArbiterWithNullSecondPlayer() {
+	void testNewImpatientArbiterWithNullSecondPlayer() {
 		try {
 			new ImpatientArbiter(new StandardDecisionRules(), new ComputerPlayer("computer1"), null, 1);
 			fail("Should not have reached this point. All consturctor parameters must be non-null.");
@@ -40,7 +40,7 @@ public class ImpatientArbiterTest {
 	}
 
 	@Test
-	public void testNewImpatientArbiterWithNegativeTimeToWait() {
+	void testNewImpatientArbiterWithNegativeTimeToWait() {
 		ComputerPlayer player1 = new ComputerPlayer("Computer1");
 		ComputerPlayer player2 = new ComputerPlayer("Computer2");
 		ImpatientArbiter arbiter = new ImpatientArbiter(new StandardDecisionRules(), player1, player2, -2);
@@ -48,7 +48,7 @@ public class ImpatientArbiterTest {
 	}
 
 	@Test
-	public void testNewImpatientArbiterWithPositiveTimeToWait() {
+	void testNewImpatientArbiterWithPositiveTimeToWait() {
 		ComputerPlayer player1 = new ComputerPlayer("Computer1");
 		ComputerPlayer player2 = new ComputerPlayer("Computer2");
 		ImpatientArbiter arbiter = new ImpatientArbiter(new StandardDecisionRules(), player1, player2, 6);

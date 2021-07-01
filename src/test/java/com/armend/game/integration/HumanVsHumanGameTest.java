@@ -14,10 +14,10 @@ import com.armend.game.components.ItemInput;
 import com.armend.game.components.Player;
 import com.armend.game.rules.StandardDecisionRules;
 
-public class HumanVsHumanGameTest {
+class HumanVsHumanGameTest {
 
 	@Test
-	public void testPlayHumanVsHuman() {
+	void testPlayHumanVsHuman() {
 		ItemInput player1Input = new ConsoleUserItemInput(new StringReader("S\nP\nR\nR"));
 		Player player1 = new HumanPlayer("Player1", player1Input);
 
@@ -38,7 +38,7 @@ public class HumanVsHumanGameTest {
 	}
 
 	@Test
-	public void testPlayHumanVsHumanWithWrongFirstPlayerInput() {
+	void testPlayHumanVsHumanWithWrongFirstPlayerInput() {
 		ItemInput player1Input = new ConsoleUserItemInput(new StringReader("A"));
 		Player player1 = new HumanPlayer("Player1", player1Input);
 
@@ -55,7 +55,7 @@ public class HumanVsHumanGameTest {
 	}
 
 	@Test
-	public void testPlayHumanVsHumanWithWrongSecondPlayerInput() {
+	void testPlayHumanVsHumanWithWrongSecondPlayerInput() {
 		ItemInput player1Input = new ConsoleUserItemInput(new StringReader("S"));
 		Player player1 = new HumanPlayer("Player1", player1Input);
 

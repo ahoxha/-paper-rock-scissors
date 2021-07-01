@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class HumanPlayerTest {
+class HumanPlayerTest {
 	@Test
-	public void testNewHumanPlayerWithNullName() {
+	void testNewHumanPlayerWithNullName() {
 		try {
 			new HumanPlayer(null, null);
 			fail("Should not have reached this point.");
@@ -17,7 +17,7 @@ public class HumanPlayerTest {
 	}
 
 	@Test
-	public void testNewHumanPlayerWithNullItemInput() {
+	void testNewHumanPlayerWithNullItemInput() {
 		try {
 			new HumanPlayer("John", null);
 			fail("Should not have reached this ppint.");
@@ -27,7 +27,7 @@ public class HumanPlayerTest {
 	}
 
 	@Test
-	public void testNewHumanPlayerWithEmptyName() {
+	void testNewHumanPlayerWithEmptyName() {
 		try {
 			new HumanPlayer("", null);
 		} catch (IllegalArgumentException e) {

@@ -4,22 +4,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
-public class ScoreBoardTest {
+class ScoreBoardTest {
 	@Test
-	public void testGetLastWithEmptyScoreBoard() {
+	void testGetLastWithEmptyScoreBoard() {
 		ScoreBoard board = new ScoreBoard("player1", "player2");
 		assertEquals("", board.getLast());
 	}
 
 	@Test
-	public void testGetLastWithOneRecordScoreBoard() {
+	void testGetLastWithOneRecordScoreBoard() {
 		ScoreBoard board = new ScoreBoard("player1", "player2");
 		board.addRecords("Scissors", "Rock", "player2");
 		assertEquals(" [player1: Scissors; player2: Rock]", board.getLast());
 	}
 
 	@Test
-	public void testGetLastWithMoreThanOneRecords() {
+	void testGetLastWithMoreThanOneRecords() {
 		ScoreBoard board = new ScoreBoard("player1", "player2");
 		board.addRecords("Rock", "Rock", "It's a tie");
 		board.addRecords("Scissors", "Paper", "player1");
@@ -28,7 +28,7 @@ public class ScoreBoardTest {
 	}
 
 	@Test
-	public void testIncrementFirstPlayerScore() {
+	void testIncrementFirstPlayerScore() {
 		ScoreBoard board = new ScoreBoard("Playe1", "Player2");
 		board.incrementFirstPlayesScore();
 		board.incrementFirstPlayesScore();
@@ -39,7 +39,7 @@ public class ScoreBoardTest {
 	}
 
 	@Test
-	public void testIncrementSecondPlayersScore() {
+	void testIncrementSecondPlayersScore() {
 		ScoreBoard board = new ScoreBoard("Player1", "Player2");
 		board.incrementSecondPlayersScore();
 		assertEquals(1, board.getSecondPlayersTotalScore());
@@ -49,7 +49,7 @@ public class ScoreBoardTest {
 	}
 
 	@Test
-	public void testIncrementTies() {
+	void testIncrementTies() {
 		ScoreBoard board = new ScoreBoard("Player1", "Player2");
 		board.incrementTies();
 		board.incrementTies();
@@ -61,7 +61,7 @@ public class ScoreBoardTest {
 	}
 
 	@Test
-	public void testIncrementAll() {
+	void testIncrementAll() {
 		ScoreBoard board = new ScoreBoard("Player1", "Player2");
 		board.incrementSecondPlayersScore();
 		board.incrementFirstPlayesScore();
@@ -75,7 +75,7 @@ public class ScoreBoardTest {
 	}
 
 	@Test
-	public void testPrintWithNullPrintStream() {
+	void testPrintWithNullPrintStream() {
 		ScoreBoard board = new ScoreBoard("Player1", "Player2");
 		try {
 			board.printTo(null);
@@ -86,7 +86,7 @@ public class ScoreBoardTest {
 	}
 
 	@Test
-	public void testNewScoreBoardWithNullFirstPlayer() {
+	void testNewScoreBoardWithNullFirstPlayer() {
 		try {
 			new ScoreBoard(null, "test");
 			fail("Should not have reached this ppint, you must provide non-empty names for both players.");
@@ -96,7 +96,7 @@ public class ScoreBoardTest {
 	}
 
 	@Test
-	public void testNewScoreBoardWithNullSecondPlayer() {
+	void testNewScoreBoardWithNullSecondPlayer() {
 		try {
 			new ScoreBoard("Player1", null);
 		} catch (IllegalArgumentException e) {
@@ -105,14 +105,14 @@ public class ScoreBoardTest {
 	}
 
 	@Test
-	public void testGetPlayers() {
+	void testGetPlayers() {
 		ScoreBoard board = new ScoreBoard("Computer", "John Doe");
 		assertEquals("Computer", board.getFirstPlayer());
 		assertEquals("John Doe", board.getSecondPlayer());
 	}
 
 	@Test
-	public void testNewScoreBoardWithEmptyFirstPlayer() {
+	void testNewScoreBoardWithEmptyFirstPlayer() {
 		try {
 			new ScoreBoard("", "test");
 			fail("Should not have reached this ppint, you must provide non-empty names for both players.");
@@ -122,7 +122,7 @@ public class ScoreBoardTest {
 	}
 
 	@Test
-	public void testNewScoreBoardWithEmptySecondPlayer() {
+	void testNewScoreBoardWithEmptySecondPlayer() {
 		try {
 			new ScoreBoard("Test", "");
 			fail("Should not have reached this ppint, you must provide non-empty names for both players.");

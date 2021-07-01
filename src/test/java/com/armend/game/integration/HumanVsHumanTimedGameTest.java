@@ -22,9 +22,9 @@ import com.armend.game.components.ItemInput;
 import com.armend.game.components.Player;
 import com.armend.game.rules.StandardDecisionRules;
 
-public class HumanVsHumanTimedGameTest {
+class HumanVsHumanTimedGameTest {
 	@Test
-	public void testPlayHumanVsHuman() {
+	void testPlayHumanVsHuman() {
 		ItemInput player1Input = new ConsoleUserItemInput(new StringReader("S\nP\nR\nR"));
 		Player player1 = new HumanPlayer("Player1", player1Input);
 
@@ -43,7 +43,7 @@ public class HumanVsHumanTimedGameTest {
 	}
 
 	@Test
-	public void testPlayHumanVsHumanWithSecondFirstTimeout() throws UnsupportedEncodingException {
+	void testPlayHumanVsHumanWithSecondFirstTimeout() throws UnsupportedEncodingException {
 
 		ItemInput player1Input = new ConsoleUserItemInput(
 				new InputStreamReader(System.in, StandardCharsets.UTF_8.name()));
@@ -66,7 +66,7 @@ public class HumanVsHumanTimedGameTest {
 	}
 
 	@Test
-	public void testPlayHumanVsHumanWithSecondPlayerTimeout() throws UnsupportedEncodingException {
+	void testPlayHumanVsHumanWithSecondPlayerTimeout() throws UnsupportedEncodingException {
 		ItemInput player1Input = new ConsoleUserItemInput(new StringReader("S\nP\nR\nR"));
 		Player player1 = new HumanPlayer("Player1", player1Input);
 
@@ -88,7 +88,7 @@ public class HumanVsHumanTimedGameTest {
 	}
 
 	@Test
-	public void testPlayHumanVsHumanWithBothPlayersTimeout() throws UnsupportedEncodingException {
+	void testPlayHumanVsHumanWithBothPlayersTimeout() throws UnsupportedEncodingException {
 		ItemInput player1Input = new ConsoleUserItemInput(
 				new InputStreamReader(System.in, StandardCharsets.UTF_8.name()));
 		Player player1 = new HumanPlayer("Player1", player1Input);
@@ -107,11 +107,11 @@ public class HumanVsHumanTimedGameTest {
 
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		arbiter.printScores(new PrintStream(out, true, StandardCharsets.UTF_8.name()));
-		assertTrue(new String(out.toByteArray(), StandardCharsets.UTF_8).contains("Timed out"));
+		assertTrue(out.toString(StandardCharsets.UTF_8).contains("Timed out"));
 	}
 
 	@Test
-	public void testPlayHumanVsHumanWithWrongInput() {
+	void testPlayHumanVsHumanWithWrongInput() {
 		ItemInput player1Input = new ConsoleUserItemInput(new StringReader("A\nB\nC"));
 		Player player1 = new HumanPlayer("Player1", player1Input);
 

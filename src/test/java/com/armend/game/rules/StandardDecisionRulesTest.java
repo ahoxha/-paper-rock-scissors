@@ -10,62 +10,62 @@ import com.armend.game.components.Item;
 import com.armend.game.rules.DecisionRules;
 import com.armend.game.rules.StandardDecisionRules;
 
-public class StandardDecisionRulesTest {
+class StandardDecisionRulesTest {
 
 	private static DecisionRules strategy;
 
 	@BeforeAll
-	public static void initializeStrategy() {
+	static void initializeStrategy() {
 		strategy = new StandardDecisionRules();
 	}
 
 	@Test
-	public void testRockPaper() {
+	void testRockPaper() {
 		assertEquals(Item.Paper, strategy.whoIsTheWinner(Item.Rock, Item.Paper));
 	}
 
 	@Test
-	public void testPaperRock() {
+	void testPaperRock() {
 		assertEquals(Item.Paper, strategy.whoIsTheWinner(Item.Paper, Item.Rock));
 	}
 
 	@Test
-	public void testRockScissors() {
+	void testRockScissors() {
 		assertEquals(Item.Rock, strategy.whoIsTheWinner(Item.Rock, Item.Scissors));
 	}
 
 	@Test
-	public void testScissorsRock() {
+	void testScissorsRock() {
 		assertEquals(Item.Rock, strategy.whoIsTheWinner(Item.Scissors, Item.Rock));
 	}
 
 	@Test
-	public void testScissorsPaper() {
+	void testScissorsPaper() {
 		assertEquals(Item.Scissors, strategy.whoIsTheWinner(Item.Scissors, Item.Paper));
 	}
 
 	@Test
-	public void testPaperScissors() {
+	void testPaperScissors() {
 		assertEquals(Item.Scissors, strategy.whoIsTheWinner(Item.Paper, Item.Scissors));
 	}
 
 	@Test
-	public void testPaperPaper() {
+	void testPaperPaper() {
 		assertNull(strategy.whoIsTheWinner(Item.Paper, Item.Paper));
 	}
 
 	@Test
-	public void testRockRock() {
+	void testRockRock() {
 		assertNull(strategy.whoIsTheWinner(Item.Rock, Item.Rock));
 	}
 
 	@Test
-	public void testScissorsScissors() {
+	void testScissorsScissors() {
 		assertNull(strategy.whoIsTheWinner(Item.Scissors, Item.Scissors));
 	}
 
 	@Test
-	public void testWithFirstNullItem() {
+	void testWithFirstNullItem() {
 		try {
 			strategy.whoIsTheWinner(null, Item.Paper);
 			fail("Should have thrown an IllegalArgumentException");
@@ -75,7 +75,7 @@ public class StandardDecisionRulesTest {
 	}
 
 	@Test
-	public void testWithSecondNullItem() {
+	void testWithSecondNullItem() {
 		try {
 			strategy.whoIsTheWinner(Item.Rock, null);
 			fail("Should have thrown an IllegalArgumentException");
@@ -85,7 +85,7 @@ public class StandardDecisionRulesTest {
 	}
 
 	@Test
-	public void testWithBothNullItems() {
+	void testWithBothNullItems() {
 		try {
 			strategy.whoIsTheWinner(null, null);
 			fail("Should have thrown an IllegalArgumentException");
