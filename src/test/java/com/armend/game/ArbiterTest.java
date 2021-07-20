@@ -15,7 +15,7 @@ class ArbiterTest {
     private static final String NULL_CONSTRUCTOR_PARAMS_ERROR_MESSAGE = "Should not have reached this point. All constructor parameters must be non-null.";
 
     @Test
-    void testNonNullDecisionRules() {
+    void when_null_decisionRules_provided_then_expect_exception() {
         try {
             new Arbiter(null, null, null);
             fail(NULL_CONSTRUCTOR_PARAMS_ERROR_MESSAGE);
@@ -25,7 +25,7 @@ class ArbiterTest {
     }
 
     @Test
-    void testNonNullPlayer1() {
+    void when_null_player1_provided_then_expect_exception() {
         try {
             new Arbiter(new StandardDecisionRules(), null, null);
             fail(NULL_CONSTRUCTOR_PARAMS_ERROR_MESSAGE);
@@ -35,7 +35,7 @@ class ArbiterTest {
     }
 
     @Test
-    void testNonNullPlayer2() {
+    void when_null_player2_provided_then_expect_exception() {
         try {
             new Arbiter(new StandardDecisionRules(), new ComputerPlayer("Computer"), null);
             fail(NULL_CONSTRUCTOR_PARAMS_ERROR_MESSAGE);
@@ -45,7 +45,7 @@ class ArbiterTest {
     }
 
     @Test
-    void testSetNullDecisionRules() {
+    void when_setting_current_decisionRules_to_null_then_expect_exception() {
         Arbiter arbiter = new Arbiter(new StandardDecisionRules(), new ComputerPlayer("Computer1"), new ComputerPlayer("Computer2"));
 
         arbiter.setDecisionRules(null);
@@ -54,7 +54,7 @@ class ArbiterTest {
     }
 
     @Test
-    void testSetNewDecisionRules() {
+    void when_new_decisionRules_are_set_then_arbiter_should_use_the_new_rules() {
         DecisionRules decisionRules1 = new StandardDecisionRules();
         DecisionRules decisionRules2 = new StandardDecisionRules();
         Arbiter arbiter = new Arbiter(decisionRules1, new ComputerPlayer("C1"), new ComputerPlayer("C2"));
