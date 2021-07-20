@@ -13,7 +13,7 @@ class ImpatientArbiterTest {
 	void testNewImpatientArbiterWithNullDecisionRules() {
 		try {
 			new ImpatientArbiter(null, null, null, 1);
-			fail("Should not have reached this point. All consturctor parameters must be non-null.");
+			fail("Should not have reached this point. All constructor parameters must be non-null.");
 		} catch (NullPointerException e) {
 			assertEquals("NULL value for 'decisionRules' is not allowed", e.getMessage());
 		}
@@ -23,7 +23,7 @@ class ImpatientArbiterTest {
 	void testNewImpatientArbiterWithNullFirstPlayer() {
 		try {
 			new ImpatientArbiter(new StandardDecisionRules(), null, null, 1);
-			fail("Should not have reached this point. All consturctor parameters must be non-null.");
+			fail("Should not have reached this point. All constructor parameters must be non-null.");
 		} catch (NullPointerException e) {
 			assertEquals("NULL value for 'player1' is not allowed", e.getMessage());
 		}
@@ -33,7 +33,7 @@ class ImpatientArbiterTest {
 	void testNewImpatientArbiterWithNullSecondPlayer() {
 		try {
 			new ImpatientArbiter(new StandardDecisionRules(), new ComputerPlayer("computer1"), null, 1);
-			fail("Should not have reached this point. All consturctor parameters must be non-null.");
+			fail("Should not have reached this point. All constructor parameters must be non-null.");
 		} catch (NullPointerException e) {
 			assertEquals("NULL value for 'player2' is not allowed", e.getMessage());
 		}
