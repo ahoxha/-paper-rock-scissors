@@ -41,9 +41,9 @@ public final class ComputerVsHumanConsoleGame {
 		ItemInput humanInput = new ConsoleUserItemInput(new InputStreamReader(System.in, StandardCharsets.UTF_8));
 		Player computerPlayer = new ComputerPlayer("Computer");
 		Player humanPlayer = new HumanPlayer(name, humanInput);
-		DecisionRules strategy = new StandardDecisionRules();
-		Arbiter arbiter = isTimed() ? new ImpatientArbiter(strategy, computerPlayer, humanPlayer, 3)
-				: new Arbiter(strategy, computerPlayer, humanPlayer);
+		DecisionRules decisionRules = new StandardDecisionRules();
+		Arbiter arbiter = isTimed() ? new ImpatientArbiter(decisionRules, computerPlayer, humanPlayer, 3)
+				: new Arbiter(decisionRules, computerPlayer, humanPlayer);
 		return new ComputerVsHumanConsoleGame(computerPlayer, humanPlayer, n, arbiter);
 	}
 

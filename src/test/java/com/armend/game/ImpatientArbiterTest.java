@@ -10,7 +10,7 @@ import com.armend.game.rules.StandardDecisionRules;
 
 class ImpatientArbiterTest {
 	@Test
-	void testNewImpatientArbiterWithNullStrategy() {
+	void testNewImpatientArbiterWithNullDecisionRules() {
 		try {
 			new ImpatientArbiter(null, null, null, 1);
 			fail("Should not have reached this point. All consturctor parameters must be non-null.");

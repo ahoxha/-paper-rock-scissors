@@ -10,12 +10,7 @@ import com.armend.game.components.Item;
 
 class StandardDecisionRulesTest {
 
-	private static DecisionRules rules;
-
-	@BeforeAll
-	static void initializeStrategy() {
-		rules = new StandardDecisionRules();
-	}
+	private final DecisionRules rules = new StandardDecisionRules();
 
 	@Test
 	void testRockPaper() {

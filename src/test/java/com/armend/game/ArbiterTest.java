@@ -11,13 +11,16 @@ import com.armend.game.rules.DecisionRules;
 import com.armend.game.rules.StandardDecisionRules;
 
 class ArbiterTest {
+
+    private static final String NULL_CONSTRUCTOR_PARAMS_ERROR_MESSAGE = "Should not have reached this point. All constructor parameters must be non-null.";
+
     @Test
-    void testNonNullStrategy() {
+    void testNonNullDecisionRules() {
         try {
             new Arbiter(null, null, null);
-            fail("Should not have reached this point. All consturctor parameters must be non-null.");
+            fail(NULL_CONSTRUCTOR_PARAMS_ERROR_MESSAGE);
         } catch (NullPointerException ne) {
-            assertEquals("NULL value for 'decisionRules' is not allowed", ne.getMessage());
+            assertEquals(getExpectedMessage("decisionRules"), ne.getMessage());
         }
     }
 
@@ -25,9 +28,9 @@ class ArbiterTest {
     void testNonNullPlayer1() {
         try {
             new Arbiter(new StandardDecisionRules(), null, null);
-            fail("Should not have reached this point. All consturctor parameters must be non-null.");
+            fail(NULL_CONSTRUCTOR_PARAMS_ERROR_MESSAGE);
         } catch (NullPointerException ne) {
-            assertEquals("NULL value for 'player1' is not allowed", ne.getMessage());
+            assertEquals(getExpectedMessage("player1"), ne.getMessage());
         }
     }
 
@@ -35,26 +38,34 @@ class ArbiterTest {
     void testNonNullPlayer2() {
         try {
             new Arbiter(new StandardDecisionRules(), new ComputerPlayer("Computer"), null);
-            fail("Should not have reached this point. All consturctor parameters must be non-null.");
+            fail(NULL_CONSTRUCTOR_PARAMS_ERROR_MESSAGE);
         } catch (NullPointerException ne) {
-            assertEquals("NULL value for 'player2' is not allowed", ne.getMessage());
+            assertEquals(getExpectedMessage("player2"), ne.getMessage());
         }
     }
 
     @Test
-    void testSetNullStrategy() {
+    void testSetNullDecisionRules() {
         Arbiter arbiter = new Arbiter(new StandardDecisionRules(), new ComputerPlayer("Computer1"), new ComputerPlayer("Computer2"));
+
         arbiter.setDecisionRules(null);
+
         assertNotNull(arbiter.getDecisionRules());
     }
 
     @Test
-    void testSetNewStrategy() {
-        DecisionRules strategy1 = new StandardDecisionRules();
-        DecisionRules strategy2 = new StandardDecisionRules();
-        Arbiter arbiter = new Arbiter(strategy1, new ComputerPlayer("C1"), new ComputerPlayer("C2"));
-        assertEquals(strategy1, arbiter.getDecisionRules());
-        arbiter.setDecisionRules(strategy2);
-        assertEquals(strategy2, arbiter.getDecisionRules());
+    void testSetNewDecisionRules() {
+        DecisionRules decisionRules1 = new StandardDecisionRules();
+        DecisionRules decisionRules2 = new StandardDecisionRules();
+        Arbiter arbiter = new Arbiter(decisionRules1, new ComputerPlayer("C1"), new ComputerPlayer("C2"));
+
+        assertEquals(decisionRules1, arbiter.getDecisionRules());
+        arbiter.setDecisionRules(decisionRules2);
+
+        assertEquals(decisionRules2, arbiter.getDecisionRules());
+    }
+
+    private String getExpectedMessage(String parameter) {
+        return "NULL value for '" + parameter + "' is not allowed";
     }
 }
